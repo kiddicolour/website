@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/coloring-pages",
+      "handler": "coloring-page.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/coloring-pages/count",
+      "handler": "coloring-page.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/coloring-pages/:id",
+      "handler": "coloring-page.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/coloring-pages",
+      "handler": "coloring-page.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/coloring-pages/:id",
+      "handler": "coloring-page.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/coloring-pages/:id",
+      "handler": "coloring-page.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
