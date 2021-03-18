@@ -1,36 +1,53 @@
-import * as React from "react"
-import { Link } from "gatsby"
+import React from "react"
+import PropTypes from "prop-types"
+import {
+  Layout as ThemeLayout,
+  Header,
+  Logo,
+  NavMenu,
+  MobileNav,
+  MenuToggle,
+  ColorToggle,
+  ContentWrapper,
+  SideNav,
+  Main,
+  Footer,
+  FooterWidgets
+} from "gatsby-theme-elements"
 
-const Layout = ({ location, title, children }) => {
-  const rootPath = `${__PATH_PREFIX__}/`
-  const isRootPath = location.pathname === rootPath
-  let header
+import LogoSVG from "./Logo"
 
-  if (isRootPath) {
-    header = (
-      <h1 className="main-heading">
-        <Link to="/">{title}</Link>
-      </h1>
-    )
-  } else {
-    header = (
-      <Link className="header-link-home" to="/">
-        {title}
-      </Link>
-    )
-  }
+import Nav from "./nav"
+import Seo from "./seo"
 
+const Layout = ({ children }) => {
   return (
-    <div className="global-wrapper" data-is-root-path={isRootPath}>
-      <header className="global-header">{header}</header>
-      <main>{children}</main>
-      <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>
-      </footer>
-    </div>
+    <ThemeLayout>
+      <Seo />
+      <Header>
+        <Logo/>
+        <NavMenu>
+          <Nav />
+        </NavMenu>
+        <MobileNav/>
+        <MenuToggle/>
+        <ColorToggle/>
+      </Header>
+      <ContentWrapper>
+        <SideNav/>
+        <Main>
+          {children}
+        </Main>    
+      </ContentWrapper>
+      <Footer>
+        <FooterWidgets/>
+      </Footer>
+    </ThemeLayout>
   )
 }
 
-export default Layout
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
+}
+
+export default Layout  

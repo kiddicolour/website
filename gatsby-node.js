@@ -1,24 +1,33 @@
-const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
-
-exports.createPages = async ({ graphql, actions, reporter }) => {
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-
-  // Define a template for blog post
-  const blogPost = path.resolve(`./src/templates/blog-post.js`)
-
-  // Get all markdown blog posts sorted by date
   const result = await graphql(
     `
       {
-        allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: ASC }
-          limit: 1000
-        ) {
-          nodes {
-            id
-            fields {
-              slug
+        drawings: allStrapiDrawing {
+          edges {
+            node {
+              strapiId
+            }
+          }
+        }
+        ages: allStrapiAge {
+          edges {
+            node {
+              strapiId
+            }
+          }
+        }
+        themes: allStrapiTheme {
+          edges {
+            node {
+              strapiId
+            }
+          }
+        }
+        types: allStrapiType {
+          edges {
+            node {
+              strapiId
             }
           }
         }
@@ -27,89 +36,54 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   )
 
   if (result.errors) {
-    reporter.panicOnBuild(
-      `There was an error loading your blog posts`,
-      result.errors
-    )
-    return
+    throw result.errors
   }
 
-  const posts = result.data.allMarkdownRemark.nodes
-
-  // Create blog posts pages
-  // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
-  // `context` is available in the template as a prop and as a variable in GraphQL
-
-  if (posts.length > 0) {
-    posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
-
-      createPage({
-        path: post.fields.slug,
-        component: blogPost,
-        context: {
-          id: post.id,
-          previousPostId,
-          nextPostId,
-        },
-      })
+  // Create drawing pages.
+  const drawings = result.data.drawings.edges
+  drawings.forEach((drawing, index) => {
+    createPage({
+      path: `/coloring-page/${drawing.node.strapiId}`,
+      component: require.resolve("./src/templates/drawing.js"),
+      context: {
+        id: drawing.node.strapiId,
+      },
     })
-  }
-}
-
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
-
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
-
-    createNodeField({
-      name: `slug`,
-      node,
-      value,
+  })
+  
+  // Create age pages.
+  const ages = result.data.ages.edges
+  ages.forEach((age, index) => {
+    createPage({
+      path: `/age/${age.node.strapiId}`,
+      component: require.resolve("./src/templates/age.js"),
+      context: {
+        id: age.node.strapiId,
+      },
     })
-  }
-}
+  })
 
-exports.createSchemaCustomization = ({ actions }) => {
-  const { createTypes } = actions
+  // Create theme pages.
+  const themes = result.data.themes.edges
+  themes.forEach((theme, index) => {
+    createPage({
+      path: `/theme/${theme.node.strapiId}`,
+      component: require.resolve("./src/templates/theme.js"),
+      context: {
+        id: theme.node.strapiId,
+      },
+    })
+  })
 
-  // Explicitly define the siteMetadata {} object
-  // This way those will always be defined even if removed from gatsby-config.js
-
-  // Also explicitly define the Markdown frontmatter
-  // This way the "MarkdownRemark" queries will return `null` even when no
-  // blog posts are stored inside "content/blog" instead of returning an error
-  createTypes(`
-    type SiteSiteMetadata {
-      author: Author
-      siteUrl: String
-      social: Social
-    }
-
-    type Author {
-      name: String
-      summary: String
-    }
-
-    type Social {
-      twitter: String
-    }
-
-    type MarkdownRemark implements Node {
-      frontmatter: Frontmatter
-      fields: Fields
-    }
-
-    type Frontmatter {
-      title: String
-      description: String
-      date: Date @dateformat
-    }
-
-    type Fields {
-      slug: String
-    }
-  `)
+  // Create type pages.
+  const types = result.data.types.edges
+  types.forEach((type, index) => {
+    createPage({
+      path: `/type/${type.node.strapiId}`,
+      component: require.resolve("./src/templates/type.js"),
+      context: {
+        id: type.node.strapiId,
+      },
+    })
+  })
 }
