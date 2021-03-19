@@ -1,5 +1,5 @@
 import React from "react"
-import { ReactComponent as PlaceholderLogo } from "../images/logo.svg"
+import { ReactComponent as PlaceholderLogo } from "../images/kiddicolour.svg"
 /**
  * Shadow this file to add a default logo to the <Logo /> component
  *
