@@ -48,13 +48,13 @@ const Nav = () => (
               render={data => (
                 <>
                   <li key="nav_ages">
-                    <Dropdown items={data.allStrapiAge.edges} label="Ages" type="age" />
-                  </li>
-                  <li key="nav_themes">
-                    <Dropdown items={data.allStrapiTheme.edges} label="Theme" type="theme"/>
+                    <Dropdown items={data.allStrapiAge.edges} label="age" type="age" />
                   </li>
                   <li key="nav_types">
-                    <Dropdown items={data.allStrapiType.edges} label="Types" type="type"/>
+                    <Dropdown items={data.allStrapiType.edges} label="type" type="type"/>
+                  </li>
+                  <li key="nav_themes">
+                    <Dropdown items={data.allStrapiTheme.edges} label="theme" type="theme"/>
                   </li>
                 </>
               )
