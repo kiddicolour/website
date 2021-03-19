@@ -6,8 +6,12 @@ import DrawingComponent from "../components/drawings"
 
 import "../assets/css/main.css"
 
-const IndexPage = () => (
-  <Layout>
+const IndexPage = ({data, location}) => {
+  
+  const siteTitle = data?.site.siteMetadata?.title || `Title`
+
+  return (
+  <Layout location={location} title={siteTitle}>
     <StaticQuery
       query={graphql`
         query {
@@ -43,6 +47,6 @@ const IndexPage = () => (
       )}
     />
   </Layout>
-)
+)}
 
 export default IndexPage

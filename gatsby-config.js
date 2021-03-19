@@ -36,7 +36,9 @@ module.exports = {
           "drawing",
           "age",
           "theme",
-          "type"
+          "type",
+          "download",
+          "feature",
         ],
         queryLimit: 1000,
       },
@@ -54,7 +56,21 @@ module.exports = {
         display: "minimal-ui",
       },
     },
-    "gatsby-theme-elements",
+    {
+      resolve: `gatsby-theme-material-ui`,
+      options: {
+        webFontsConfig: {
+          fonts: {
+            google: [
+              {
+                family: `Montserrat`,
+                variants: [`300`, `400`, `500`],
+              },
+            ],
+          },
+        },
+      },
+    },
     "gatsby-plugin-offline",
   ],
 }
