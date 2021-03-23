@@ -1,35 +1,49 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import DrawingsComponent from "../components/drawings"
+import ReactMarkdown from "react-markdown"
+import Moment from "react-moment"
+
 import Layout from "../components/layout"
 
 export const query = graphql`
-  query Download($id: Int!) {
-    downloads: allStrapiDownload {
-      edges {
-        node {
-          id
-          title
-        }
-      }
-    }
-    download: strapiDownload(strapiId: { eq: $id } ) {
+  query DownloadQuery($id: Int!) {
+    strapiDownload(strapiId: { eq: $id } ) {
+      strapiId
       title
+      preview {
+        url
+      }
+      file {
+        url
+      }
     }
   }
 `
 
 const Download = ({ data }) => {
-  const downloads = data.downloads.edges
-  const download = data.download.title
-
+  const download = data.strapiDownload
   return (
     <Layout>
-      <div className="uk-section">
-        <div className="uk-container uk-container-large">
-          <h1>{download}</h1>
-          <DrawingsComponent drawings={downloads} />
+      <div>
+        <div
+          id="banner"
+          className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
+          data-src={download.image.publicURL}
+          data-srcset={download.image.publicURL}
+          data-uk-img
+        >
+          <h1>{download.title}</h1>
+          {download.file.url}
+        </div>
+
+        <div className="uk-section">
+          <div className="uk-container uk-container-small">
+            <ReactMarkdown source={download.description} />
+            <p>
+              <Moment format="MMM Do YYYY">{download.updated_at}</Moment>
+            </p>
+          </div>
         </div>
       </div>
     </Layout>

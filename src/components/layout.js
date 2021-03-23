@@ -1,49 +1,46 @@
 import React from "react"
 import PropTypes from "prop-types"
-import {
-  Layout as ThemeLayout,
-  Header,
-  Logo,
-  NavMenu,
-  MobileNav,
-  MenuToggle,
-  ColorToggle,
-  ContentWrapper,
-  SideNav,
-  Main,
-  Footer,
-  FooterWidgets
-} from "gatsby-theme-elements"
+
+import { Link } from "gatsby"
 
 import LogoSVG from "./Logo"
 
 import Nav from "./nav"
 import Seo from "./seo"
 
-import Theme from "../gatsby-theme-elements/theme.js"
+const Layout = ({location, title, children}) => {
 
-const Layout = ({ children }) => {
+  const rootPath = `${__PATH_PREFIX__}/`
+  const isRootPath = location.pathname === rootPath
+  let header
+
+  if (isRootPath) {
+    header = (
+      <h1 className="main-heading">
+        <Link to="/">{title}</Link>
+      </h1>
+    )
+  } else {
+    header = (
+      <Link className="header-link-home" to="/">
+        {title}
+      </Link>
+    )
+  }
+
   return (
-    <ThemeLayout>
-      <Seo />
-      <Header style={{backgroundColor: Theme.colors.secondary}}>
-        <Logo/>
-        <NavMenu>
-          <Nav />
-        </NavMenu>
-        <MobileNav/>
-        <MenuToggle/>
-      </Header>
-      <ContentWrapper>
-        <SideNav/>
-        <Main>
-          {children}
-        </Main>    
-      </ContentWrapper>
-      <Footer>
-        <FooterWidgets/>
-      </Footer>
-    </ThemeLayout>
+    <div>
+      <div className="global-wrapper" data-is-root-path={isRootPath}>
+        <header className="global-header">{header}</header>
+        <main>{children}</main>
+        <footer>
+          © {new Date().getFullYear()}, Built with
+          {` `}
+          <a href="https://www.gatsbyjs.com">Gatsby</a>
+        </footer>
+      </div>
+
+    </div>
   )
 }
 
