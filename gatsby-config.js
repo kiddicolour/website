@@ -21,9 +21,9 @@ module.exports = {
   plugins: [
     "gatsby-plugin-react-helmet",
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: `images`,
+        name: "images",
         path: `${__dirname}/src/images`,
       },
     },
@@ -40,13 +40,14 @@ module.exports = {
           "download",
           "feature",
         ],
+        singleTypes: ["global", "seo"],
         queryLimit: 1000,
       },
     },
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: "gatsby-plugin-manifest",
       options: {
         name: "gatsby-starter-default",
         short_name: "starter",
@@ -56,21 +57,21 @@ module.exports = {
         display: "minimal-ui",
       },
     },
-    {
-      resolve: `gatsby-theme-material-ui`,
-      options: {
-        webFontsConfig: {
-          fonts: {
-            google: [
-              {
-                family: `Montserrat`,
-                variants: [`300`, `400`, `500`],
-              },
-            ],
-          },
-        },
-      },
-    },
+    // {
+    //   resolve: `gatsby-theme-material-ui`,
+    //   options: {
+    //     webFontsConfig: {
+    //       fonts: {
+    //         google: [
+    //           {
+    //             family: `Montserrat`,
+    //             variants: [`300`, `400`, `500`],
+    //           },
+    //         ],
+    //       },
+    //     },
+    //   },
+    // },
     "gatsby-plugin-offline",
   ],
 }

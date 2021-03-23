@@ -1,36 +1,12 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-// import { Link } from "gatsby"
-import {
-  BottomNavigationAction,
-  Button,
-  CardActionArea,
-  Fab,
-  IconButton,
-  Link,
-} from "gatsby-theme-material-ui";
-
-// import {
-//   Layout as ThemeLayout,
-//   Header,
-//   Logo,
-//   NavMenu,
-//   MobileNav,
-//   MenuToggle,
-//   ColorToggle,
-//   ContentWrapper,
-//   SideNav,
-//   Main,
-//   Footer,
-//   FooterWidgets
-// } from "gatsby-theme-elements"
+import { Link } from "gatsby"
 
 import LogoSVG from "./Logo"
 
 import Nav from "./nav"
 import Seo from "./seo"
-import Paperbase from "./material-ui/Paperbase"
 
 const Layout = ({location, title, children}) => {
 
@@ -53,7 +29,7 @@ const Layout = ({location, title, children}) => {
   }
 
   return (
-    <Paperbase>
+    <div>
       <div className="global-wrapper" data-is-root-path={isRootPath}>
         <header className="global-header">{header}</header>
         <main>{children}</main>
@@ -64,31 +40,7 @@ const Layout = ({location, title, children}) => {
         </footer>
       </div>
 
-    </Paperbase>
-  )
-
-  return (
-    <ThemeLayout>
-      <Seo />
-      <Header>
-        <Logo/>
-        <NavMenu>
-          <Nav />
-        </NavMenu>
-        <MobileNav/>
-        <MenuToggle/>
-        <ColorToggle/>
-      </Header>
-      <ContentWrapper>
-        <SideNav/>
-        <Main>
-          {children}
-        </Main>    
-      </ContentWrapper>
-      <Footer>
-        <FooterWidgets/>
-      </Footer>
-    </ThemeLayout>
+    </div>
   )
 }
 

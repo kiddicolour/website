@@ -1,3 +1,26 @@
+const path = require('path');
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    },
+  });
+};
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type StrapiGlobalDefaultSeo {
+      keywords: String
+    }
+    type StrapiFeature implements Node {
+      description: String
+    }
+  `
+  createTypes(typeDefs)
+}
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const result = await graphql(
@@ -87,7 +110,7 @@ exports.createPages = async ({ graphql, actions }) => {
   types.forEach((type, index) => {
     createPage({
       path: `/type/${type.node.strapiId}`,
-      component: require.resolve("./src/templates/download.js"),
+      component: require.resolve("./src/templates/type.js"),
       context: {
         id: type.node.strapiId,
       },
