@@ -36,7 +36,8 @@ module.exports = {
           "drawing",
           "age",
           "theme",
-          "type"
+          "type",
+          "download"
         ],
         queryLimit: 1000,
       },

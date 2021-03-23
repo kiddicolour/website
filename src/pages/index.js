@@ -36,7 +36,7 @@ const IndexPage = () => (
       render={data => (
         <div className="uk-section">
           <div className="uk-container uk-container-large">
-            <h1>Strapi blog</h1>
+            <h1>kiddicolour homepage</h1>
             <DrawingComponent drawings={data.allStrapiDrawing.edges} />
           </div>
         </div>

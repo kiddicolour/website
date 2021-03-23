@@ -20,18 +20,19 @@ import LogoSVG from "./Logo"
 import Nav from "./nav"
 import Seo from "./seo"
 
+import Theme from "../gatsby-theme-elements/theme.js"
+
 const Layout = ({ children }) => {
   return (
     <ThemeLayout>
       <Seo />
-      <Header>
+      <Header style={{backgroundColor: Theme.colors.secondary}}>
         <Logo/>
         <NavMenu>
           <Nav />
         </NavMenu>
         <MobileNav/>
         <MenuToggle/>
-        <ColorToggle/>
       </Header>
       <ContentWrapper>
         <SideNav/>

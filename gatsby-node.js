@@ -31,6 +31,13 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
+        downloads: allStrapiDownload {
+          edges {
+            node {
+              strapiId
+            }
+          }
+        }
       }
     `
   )
@@ -83,6 +90,18 @@ exports.createPages = async ({ graphql, actions }) => {
       component: require.resolve("./src/templates/type.js"),
       context: {
         id: type.node.strapiId,
+      },
+    })
+  })
+
+  // Create download pages.
+  const downloads = result.data.downloads.edges
+  downloads.forEach((download, index) => {
+    createPage({
+      path: `/download/${download.node.strapiId}`,
+      component: require.resolve("./src/templates/download.js"),
+      context: {
+        id: download.node.strapiId,
       },
     })
   })

@@ -1,12 +1,12 @@
 export default {
     topbar: {
       sticky: true,
-      maxWidth: 1260,
+      // maxWidth: 1260,
     },
     header: {
       sticky: true,
       stickyMobile: true,
-      maxWidth: 1260,
+      // maxWidth: 1260,
       mobileNavWidth: 300,
       mobileAnimation: "fade", // fade, fadeInUp, fadeInDown, slideRight, slideLeft
       spring: { tension: 170, friction: 26 }, // React Spring config object for your MobileNav
