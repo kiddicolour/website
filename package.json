@@ -29,7 +29,12 @@
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
-    "prettier": "2.0.5"
+    "eslint": "^7.22.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.23.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.0.5"
   },
   "keywords": [
     "gatsby"
@@ -42,6 +47,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
+    "lint": "eslint --fix . && echo 'Lint complete.'",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "repository": {
