@@ -1,18 +1,18 @@
-import React, { useContext } from 'react';
-import { useStaticQuery } from "gatsby";
-import AnchorLink from 'react-anchor-link-smooth-scroll';
-import { ThemeContext } from 'providers/ThemeProvider';
-import { Header } from 'components/theme';
-import { Container, Button } from 'components/common';
-import dev from 'assets/illustrations/dev.svg';
-import { Wrapper, IntroWrapper, Details, Thumbnail } from './styles';
+import React, { useContext } from 'react'
+import { useStaticQuery } from 'gatsby'
+import AnchorLink from 'react-anchor-link-smooth-scroll'
+import { ThemeContext } from 'providers/ThemeProvider'
+import { Header } from 'components/theme'
+import { Container, Button } from 'components/common'
+import dev from 'assets/illustrations/dev.svg'
+import { Wrapper, IntroWrapper, Details, Thumbnail } from './styles'
 import { composeSEO, querySEO } from 'components/common/SEO'
 
 export const Intro = () => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext)
 
-  const { strapiGlobal } = useStaticQuery(querySEO);
-  const { defaultSeo, siteName, introduction } = strapiGlobal;
+  const { strapiGlobal } = useStaticQuery(querySEO)
+  const { defaultSeo, siteName, introduction } = strapiGlobal
   const seo = composeSEO(defaultSeo, siteName)
 
   console.log("Intro seo", seo)
@@ -33,5 +33,5 @@ export const Intro = () => {
         </Thumbnail>
       </IntroWrapper>
     </Wrapper>
-  );
-};
+  )
+}

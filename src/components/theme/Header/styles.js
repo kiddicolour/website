@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Wrapper = styled.div`
   background: transparent;
@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   position: sticky;
   position: -webkit-sticky;
   top: 0;
-`;
+`
 
 export const Overlay = styled.div`
   position: fixed;
@@ -22,4 +22,4 @@ export const Overlay = styled.div`
 			display: block;
 			z-index: 4;
 	`}
-`;
+`
