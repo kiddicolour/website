@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import Navbar from './Navbar';
 import Hamburger from './Hamburger';
 import Sidebar from './Sidebar';
 import { Wrapper, Overlay } from './styles';
+import { IntroWrapper } from '../../landing/Intro/styles';
 
 export const Header = () => {
   const [sidebar, toggle] = useState(false);

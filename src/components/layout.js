@@ -5,13 +5,12 @@ import { Link } from "gatsby"
 
 import LogoSVG from "./Logo"
 
-import Nav from "./nav"
 import Seo from "./seo"
 
 const Layout = ({location, title, children}) => {
 
   const rootPath = `${__PATH_PREFIX__}/`
-  const isRootPath = location.pathname === rootPath
+  const isRootPath = location?.pathname === rootPath
   let header
 
   if (isRootPath) {

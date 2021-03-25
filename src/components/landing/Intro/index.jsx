@@ -15,11 +15,8 @@ export const Intro = () => {
   const { defaultSeo, siteName, introduction } = strapiGlobal;
   const seo = composeSEO(defaultSeo, siteName)
 
-  console.log("Intro seo", seo)
-
   return (
     <Wrapper>
-      <Header />
       <IntroWrapper as={Container}>
         <Details theme={theme}>
           <h1>{seo.title}</h1>
@@ -32,6 +29,7 @@ export const Intro = () => {
           <img src={dev} alt="I’m John and I’m a JAMStack engineer!" />
         </Thumbnail>
       </IntroWrapper>
+      <Header />
     </Wrapper>
   );
 };
