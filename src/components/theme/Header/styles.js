@@ -3,6 +3,9 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   background: transparent;
   width: 100%;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
 `;
 
 export const Overlay = styled.div`
@@ -17,6 +20,6 @@ export const Overlay = styled.div`
     sidebar &&
     `
 			display: block;
-			z-index: 4;	
+			z-index: 4;
 	`}
 `;

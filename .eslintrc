@@ -1,18 +1,28 @@
 {
   "parser": "babel-eslint",
-  "extends": "eslint:recommended",
   "env": {
     "commonjs": true,
     "es6": true,
     "node": true,
-    "browser": false
+    "browser": true
   },
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
       "jsx": false
     },
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaVersion": 2018
+  },
+  "plugins": {
+    "react",
+    "react-hooks"
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   },
   "globals": {
     "strapi": true
@@ -22,6 +32,8 @@
     "linebreak-style": ["error", "unix"],
     "no-console": 0,
     "quotes": ["error", "single"],
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }
