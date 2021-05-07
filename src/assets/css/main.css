@@ -1,14 +1,41 @@
+/* @font-face {
+  font-family: 'KiddiRegular';
+  src: local('KiddiRegular'), url(../../fonts/Kiddi2020_Regular3_2.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'KiddiBold';
+  src: local('KiddiBold'), url(../../fonts/Kiddi2020_Bold_3_1.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'KiddiOutline';
+  src: local('KiddiOutline'), url(../../fonts/Kiddi2020_Outline_3_2.ttf) format('truetype');
+}
+
+* {
+  font-family: KiddiRegular !important;
+}
+
+body {
+  background-color: #99ccff;
+}
+
+p {
+  font-size: 13px !important;
+}
+
 a {
   text-decoration: none !important;
+  text-transform: none !important;
+  color: black !important;
 }
 
 h1 {
-  font-family: Staatliches !important;
   font-size: 120px !important;
 }
 
 #category {
-  font-family: Staatliches !important;
   font-weight: 500 !important;
 }
 
@@ -32,10 +59,10 @@ h1 {
 
 .uk-navbar-container {
   background: #fff !important;
-  font-family: Staatliches !important;
 }
 
 img:hover {
   opacity: 1 !important;
   transition: opacity 0.25s cubic-bezier(0.39, 0.575, 0.565, 1) !important;
 }
+ */

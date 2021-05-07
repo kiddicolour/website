@@ -1,21 +1,23 @@
-import React, {useContext} from 'react';
-import AnchorLink from 'react-anchor-link-smooth-scroll';
-import { ThemeContext } from 'providers/ThemeProvider';
-import ToggleTheme from 'components/theme/Header/ToggleTheme';
-import { Wrapper } from './styles';
+import React, { useCallback, useState } from 'react';
+import NavbarLinksMobile from '../NavbarLinksMobile';
+import NavbarLinksTablet from '../NavbarLinksTablet';
+import NavbarLinksDesktop from '../NavbarLinksDesktop';
+import './styles.css';
 
-const NavbarLinks = ({ desktop }) => {
-  const { theme } = useContext(ThemeContext);
+const NavbarLinks = ({ device }) => {
+    const [currentNavItem, setCurrentNavItem] = useState('');
 
-  return (
-    <Wrapper desktop={desktop} theme={theme}>
-      <AnchorLink href="#about">About</AnchorLink>
-      <AnchorLink href="#projects">Projects</AnchorLink>
-      <AnchorLink href="#contact">Contact</AnchorLink>
-      <ToggleTheme />
-    </Wrapper>
-  )
+    const wrapperSetCurrentNavItem = val => {
+        setCurrentNavItem(val);
+    }
 
-};
+    return (
+        <>
+        {device === "mobile" && <NavbarLinksMobile currentNavItem={currentNavItem} setCurrentNavItem={wrapperSetCurrentNavItem} />}  
+        {device === "tablet" && <NavbarLinksTablet currentNavItem={currentNavItem} setCurrentNavItem={wrapperSetCurrentNavItem} />}  
+        {device === "desktop" && <NavbarLinksDesktop currentNavItem={currentNavItem} setCurrentNavItem={wrapperSetCurrentNavItem} />}  
+        </>
+    )
+}
 
 export default NavbarLinks;

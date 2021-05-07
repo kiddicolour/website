@@ -4,6 +4,7 @@ import { StaticQuery, graphql } from "gatsby"
 // import Layout from "../components/layout"
 import { Layout, SEO } from 'components/common';
 import { Intro, Skills, Contact, Drawings, Featured } from 'components/landing';
+import { Header } from 'components/theme';
 
 import "../assets/css/main.css"
 
@@ -15,6 +16,7 @@ const IndexPage = ({data, location}) => {
   <Layout location={location} title={siteTitle}>
       <SEO />
       <Intro />
+      <Header />
       <Featured />
       <Drawings />
       <Skills />

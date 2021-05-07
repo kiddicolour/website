@@ -1,21 +1,30 @@
-import React, { useContext } from 'react';
-import { Link } from 'gatsby';
-import { ThemeContext } from 'providers/ThemeProvider';
-import { Container } from 'components/common';
+import React from 'react';
+import { NavbarContainer } from 'components/common';
+import { Wrapper, WrapperLinks, SearchBar } from './styles';
 import NavbarLinks from '../NavbarLinks';
-import { Wrapper, Brand } from './styles';
+import './styles.css';
 
-const Navbar = () => {
-  const { theme } = useContext(ThemeContext);
+const Navbar = ({ device }) => {
+    const OnSearch = () => {
 
-  return (
-    <Wrapper as={Container}>
-      <Brand as={Link} to="/" theme={theme}>
-        John Doe
-      </Brand>
-      <NavbarLinks desktop />
-    </Wrapper>
-  );
-};
+    }
+
+    const OnTextChange = () => {
+
+    }
+
+    return (
+        <Wrapper>
+            <WrapperLinks as={NavbarContainer}>
+                <NavbarLinks device={device} />
+                <SearchBar device={device}>
+                    <form className="searchBarDesktop" action={OnSearch}>
+                        <input className="searchInputDesktop" type="text" placeholder="Search..." onChange={OnTextChange}/>
+                    </form>
+                </SearchBar>
+            </WrapperLinks>
+        </Wrapper>
+    );
+}
 
 export default Navbar;

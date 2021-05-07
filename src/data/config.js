@@ -1,5 +1,5 @@
 module.exports = {
-  defaultTitle: 'John Doe',
+  defaultTitle: 'kiddicolour',
   logo: 'https://portfolio.smakosh.com/favicon/favicon-512.png',
   author: 'John Doe',
   url: 'https://portfolio.smakosh.com',
@@ -15,7 +15,16 @@ module.exports = {
   },
   googleAnalyticsID: 'UA-88875900-4',
   themeColor: '#6b63ff',
-  backgroundColor: '#6b63ff',
+  background: '#99ccff',
+  primary: '#3366cc',
+  secondary: '#ffffcf',
+  detail: '#ffcc66',
+  textPrimary: '#000000',
+  textSecondary: '#ffffff',
+  text: {
+    header: '18px',
+    nav: '13px',
+  },
   social: {
     facebook: 'appId',
     twitter: '@smakosh',

@@ -1,4 +1,20 @@
 @font-face {
+  font-family: 'KiddiRegular';
+  src: local('KiddiRegular'), url(fonts/Kiddi2020_Regular3_2.ttf) format('truetype');
+  /* src: local('KiddiRegular'), url(fonts/Kiddi2020_regularWeb01.ttf) format('truetype'); */
+}
+
+@font-face {
+  font-family: 'KiddiBold';
+  src: local('KiddiBold'), url(fonts/Kiddi2020_Bold_3_1.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'KiddiOutline';
+  src: local('KiddiOutline'), url(fonts/Kiddi2020_Outline_3_2.ttf) format('truetype');
+}
+
+/* @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-display: fallback;
@@ -25,4 +41,4 @@
     url('./fonts/roboto-v18-latin-700.woff') format('woff'),
     url('./fonts/roboto-v18-latin-700.ttf') format('truetype'),
     url('./fonts/roboto-v18-latin-700.svg#Roboto') format('svg');
-}
+} */

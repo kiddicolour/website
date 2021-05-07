@@ -4,15 +4,17 @@ import { graphql } from "gatsby"
 import ReactMarkdown from "react-markdown"
 import Moment from "react-moment"
 
-import Layout from "../components/layout"
+import { Layout, SEO } from 'components/common';
+import { Intro } from 'components/landing';
+import { Header } from 'components/theme';
 
 export const query = graphql`
   query DrawingQuery($id: Int!) {
     strapiDrawing(strapiId: { eq: $id } ) {
       strapiId
-      title
+      name
       image {
-        url
+        publicURL
       }
     }
   }
@@ -22,6 +24,9 @@ const Drawing = ({ data }) => {
   const drawing = data.strapiDrawing
   return (
     <Layout>
+      <SEO />
+      <Intro />
+      <Header />
       <div>
         <div
           id="banner"

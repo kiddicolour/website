@@ -1,0 +1,239 @@
+.navIcon {
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-position-y: center;
+    width: 48px;
+    height: 48px;
+}
+
+.dropdownIcon {
+    background-size: 75%;
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-position-y: center;
+    width: 16px;
+    height: 48px;
+}
+
+.mobileOffset {
+    position: relative;
+    left: -2px;
+}
+
+.mobile {
+    background-position-x: center;
+}
+
+/* NAVBAR ICONS + SIZE */
+/* add -> background-size: xx%; */
+.home {
+    background-image: url('../../../../images/icons/A_home.png');
+}
+
+.age {
+    background-image: url('../../../../images/icons/B_age.png');
+}
+
+.years_1_3 {
+    background-image: url('../../../../images/icons/B_age_1_3_years.png');
+}
+
+.years_4_6 {
+    background-image: url('../../../../images/icons/B_age_4_6_years.png');
+}
+
+.years_7_9 {
+    background-image: url('../../../../images/icons/B_age_7_9_years.png');
+}
+
+.type {
+    background-image: url('../../../../images/icons/C_type.png');
+}
+
+.type_colouring {
+    background-image: url('../../../../images/icons/C_type_colouring.png');
+    background-size: 65%;
+}
+
+.type_games {
+    background-image: url('../../../../images/icons/C_type_games.png');
+}
+
+.type_puzzles {
+    background-image: url('../../../../images/icons/C_type_puzzles.png');
+}
+
+.type_stories {
+    background-image: url('../../../../images/icons/C_type_stories.png');
+}
+
+.type_crafts {
+    background-image: url('../../../../images/icons/C_type_crafts.png');
+    background-size: 73%;
+}
+
+.type_emma_and_thomas {
+    background-image: url('../../../../images/icons/C_type_Emma_and_Thomas.png');
+    background-size: 80%;
+}
+
+.type_coloured_in_for_you {
+    background-image: url('../../../../images/icons/C_type_coloured_in_for_you.png');
+    background-size: 67%;
+}
+
+.theme {
+    background-image: url('../../../../images/icons/D_theme.png');
+}
+
+.theme_animals {
+    background-image: url('../../../../images/icons/D_theme_animals.png');
+    background-size: 78%;
+}
+
+.theme_people_and_jobs {
+    background-image: url('../../../../images/icons/D_theme_people_and_jobs.png');
+    background-size: 72%;
+}
+
+.theme_birthday {
+    background-image: url('../../../../images/icons/D_theme_birthday.png');
+}
+
+.theme_nature_and_seasons {
+    background-image: url('../../../../images/icons/D_theme_nature_and_seasons.png');
+}
+
+.theme_food_and_drink {
+    background-image: url('../../../../images/icons/D_theme_food_and_drink.png');
+    background-size: 77%;
+}
+
+.theme_celebrations_and_holidays {
+    background-image: url('../../../../images/icons/D_theme_celebrations_and_holidays.png');
+    background-size: 73%;
+}
+
+.theme_fairy_tales {
+    background-image: url('../../../../images/icons/D_theme_fairy_tales.png');
+    background-size: 81%;
+}
+
+.theme_transport {
+    background-image: url('../../../../images/icons/D_theme_transport.png');
+    background-size: 74%;
+}
+
+.theme_buildings {
+    background-image: url('../../../../images/icons/D_theme_buildings.png');
+}
+
+.theme_toys {
+    background-image: url('../../../../images/icons/D_theme_toys.png');
+    background-size: 73%;
+}
+
+.theme_music_circus_fairground {
+    background-image: url('../../../../images/icons/D_theme_music_circus_fairground.png');
+    background-size: 72%;
+}
+
+.theme_animals {
+    background-image: url('../../../../images/icons/D_theme_animals.png');
+}
+
+.theme_sport {
+    background-image: url('../../../../images/icons/D_theme_sport.png');
+    background-size: 68%;
+}
+
+.theme_objects {
+    background-image: url('../../../../images/icons/D_theme_objects.png');
+}
+
+.downloads {
+    background-image: url('../../../../images/icons/E_download.png');
+    background-size: 61%;
+}
+
+.search_icon {
+    background-image: url('../../../../images/icons/G_search_icon.png');
+    background-size: 60%;
+}
+
+.filter_icon {
+    background-image: url('../../../../images/icons/H_filter_icon.png');
+    background-size: 80%;
+}
+
+.arrow_icon_up_black {
+    background-image: url('../../../../images/icons/arrow_icon_up_black.png');
+}
+
+.arrow_icon_down_white {
+    background-image: url('../../../../images/icons/arrow_icon_down_white.png');
+}
+
+.arrow_icon_down_black {
+    background-image: url('../../../../images/icons/arrow_icon_down_black.png');
+}
+
+/* END ICONS */
+
+.searchBar {
+    width: 100%;
+    height: 48px;
+    margin: 0px;
+    display: flex;
+}
+
+.searchInput {
+    width: 100%;
+    height: 100%;
+    border: 0px;
+    padding: 0px 20px 0px 20px;
+    font-size: 15px;
+    color: #999999;
+}
+
+.active {
+    background-color: #ffffcf;
+}
+
+::placeholder {
+    color: #999999;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: #999999;
+}
+
+::-ms-input-placeholder {
+    color: #999999;
+}
+
+/* MOBILE <= 425px */
+@media only screen and (max-width: 425px) {
+    .searchInput {
+        padding: 0px 15px 0px 15px;
+    }
+}
+
+/* MOBILE <= 375px */
+@media only screen and (max-width: 375px) {
+    .navIcon {
+        width: 40px;
+        height: 40px;
+        background-position-x: center;
+    }
+
+    .searchBar {
+        height: 40px;
+    }
+
+    .searchInput {
+        padding: 0px 10px 0px 10px;
+    }
+}

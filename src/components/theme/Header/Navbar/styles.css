@@ -1,0 +1,30 @@
+.searchBarDesktop {
+    margin: 0px;
+}
+
+.searchInputDesktop {
+    width: 175px;
+    height: 25px;
+    border: 0px;
+    padding: 0px 20px 0px 5px;
+    background-image: url('../../../../images/icons/G_search_icon.png');
+    background-size: 13px 15px;
+    background-repeat: no-repeat;
+    background-position-x: 183px;
+    background-position-y: center;
+    font-size: 11px;
+    color: #999999;
+}
+
+::placeholder {
+    color: #999999;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: #999999;
+}
+
+::-ms-input-placeholder {
+    color: #999999;
+}
