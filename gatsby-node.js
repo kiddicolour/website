@@ -8,7 +8,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
   });
 };
 
-exports.createSchemaCustomization = ({ actions }) => {
+/* exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
   const typeDefs = `
     type StrapiGlobalDefaultSeo {
@@ -19,7 +19,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
   `
   createTypes(typeDefs)
-}
+} */
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
@@ -37,27 +37,31 @@ exports.createPages = async ({ graphql, actions }) => {
           edges {
             node {
               strapiId
+              name
             }
           }
         }
-        themes: allStrapiTheme {
+        themes: allStrapiTheme(filter: {strapiParent: {name: {eq: "themes"}}}) {
           edges {
             node {
               strapiId
+              name
+              strapiChildren {
+                name
+                id
+              }
             }
           }
         }
-        types: allStrapiType {
+        types: allStrapiType(filter: {strapiParent: {name: {eq: "types"}}}) {
           edges {
             node {
               strapiId
-            }
-          }
-        }
-        downloads: allStrapiDownload {
-          edges {
-            node {
-              strapiId
+              name
+              strapiChildren {
+                name
+                id
+              }
             }
           }
         }
@@ -85,7 +89,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const ages = result.data.ages.edges
   ages.forEach((age, index) => {
     createPage({
-      path: `/age/${age.node.strapiId}`,
+      path: `/age/${age.node.name.replace(/ /g, "-").toLowerCase()}`,
       component: require.resolve("./src/templates/age.js"),
       context: {
         id: age.node.strapiId,
@@ -97,11 +101,20 @@ exports.createPages = async ({ graphql, actions }) => {
   const themes = result.data.themes.edges
   themes.forEach((theme, index) => {
     createPage({
-      path: `/theme/${theme.node.strapiId}`,
+      path: `/theme/${theme.node.name.replace(/ /g, "-").toLowerCase()}`,
       component: require.resolve("./src/templates/theme.js"),
       context: {
         id: theme.node.strapiId,
       },
+    })
+    theme.node.strapiChildren.forEach((subtheme, index) => {
+      createPage({
+        path: `/theme/${theme.node.name.replace(/ /g, "-").toLowerCase()}/${subtheme.name.replace(/ /g, "-").toLowerCase()}`,
+        component: require.resolve("./src/templates/theme.js"),
+        context: {
+          id: subtheme.id,
+        },
+      })
     })
   })
 
@@ -109,15 +122,24 @@ exports.createPages = async ({ graphql, actions }) => {
   const types = result.data.types.edges
   types.forEach((type, index) => {
     createPage({
-      path: `/type/${type.node.strapiId}`,
+      path: `/type/${type.node.name.replace(/ /g, "-").toLowerCase()}`,
       component: require.resolve("./src/templates/type.js"),
       context: {
         id: type.node.strapiId,
       },
     })
+    type.node.strapiChildren.forEach((subtype, index) => {
+      createPage({
+        path: `/type/${type.node.name.replace(/ /g, "-").toLowerCase()}/${subtype.name.replace(/ /g, "-").toLowerCase()}`,
+        component: require.resolve("./src/templates/type.js"),
+        context: {
+          id: subtype.id,
+        }
+      })
+    })
   })
 
-  // Create download pages.
+/*   // Create download pages.
   const downloads = result.data.downloads.edges
   downloads.forEach((download, index) => {
     createPage({
@@ -127,5 +149,5 @@ exports.createPages = async ({ graphql, actions }) => {
         id: download.node.strapiId,
       },
     })
-  })
+  }) */
 }

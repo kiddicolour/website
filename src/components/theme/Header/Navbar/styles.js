@@ -1,24 +1,23 @@
 import styled from 'styled-components';
 import {
-  primary,
-  secondary,
-  accent,
-  background,
-  logo,
+    primary,
 } from 'data/config';
 
 export const Wrapper = styled.div`
-  padding: 1.5rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    background-color: ${primary};
+    width: 100%;
+    // temp height
+    // height: 48px;
 `;
 
-export const Brand = styled.a`
-  // color: ${({ theme }) => (theme === 'light' ? '#000' : '#fff')};
-  // background-color: ${primary};
+export const WrapperLinks = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
 
-  @media (max-width: 960px) {
-    mix-blend-mode: ${({ theme }) => (theme === 'light' ? 'unset' : 'difference')};
-  }
+export const SearchBar = styled.div`
+    align-items: center;
+    margin-bottom: 0px;
+    display: ${p => (p.device === 'desktop' ? "flex": "none")};
 `;

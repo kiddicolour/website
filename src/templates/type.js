@@ -2,7 +2,9 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import DrawingsComponent from "../components/drawings"
-import Layout from "../components/layout"
+import { Layout, SEO } from 'components/common';
+import { Intro, Featured } from 'components/landing';
+import { Header } from 'components/theme';
 
 export const query = graphql`
   query Type($id: Int!) {
@@ -38,6 +40,10 @@ const Type = ({ data }) => {
 
   return (
     <Layout>
+      <SEO />
+      <Intro />
+      <Header />
+      <Featured />
       <div className="uk-section">
         <div className="uk-container uk-container-large">
           <h1>{type}</h1>

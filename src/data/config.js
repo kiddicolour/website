@@ -17,6 +17,14 @@ module.exports = {
   themeColor: '#6b63ff',
   background: '#99ccff',
   primary: '#3366cc',
+  secondary: '#ffffcf',
+  detail: '#ffcc66',
+  textPrimary: '#000000',
+  textSecondary: '#ffffff',
+  text: {
+    header: '18px',
+    nav: '13px',
+  },
   social: {
     facebook: 'appId',
     twitter: '@smakosh',

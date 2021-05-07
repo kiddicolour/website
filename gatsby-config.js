@@ -14,9 +14,9 @@ if ( config.isValidPlatform() ) {
 
 module.exports = {
   siteMetadata: {
-    title: "My super blog",
-    description: "Gatsby blog with Strapi",
-    author: "Strapi team",
+    title: "kiddicolour",
+    description: "thoughtfully designed colouring pages",
+    author: "kiddicolour",
   },
   plugins: [
     "gatsby-plugin-react-helmet",
@@ -37,10 +37,10 @@ module.exports = {
           "age",
           "theme",
           "type",
-          "download",
-          "feature",
+          /* "download",
+          "feature", */
         ],
-        singleTypes: ["global", "seo"],
+        /* singleTypes: ["global", "seo"], */
         queryLimit: 1000,
       },
     },
@@ -57,21 +57,6 @@ module.exports = {
         display: "minimal-ui",
       },
     },
-    // {
-    //   resolve: `gatsby-theme-material-ui`,
-    //   options: {
-    //     webFontsConfig: {
-    //       fonts: {
-    //         google: [
-    //           {
-    //             family: `Montserrat`,
-    //             variants: [`300`, `400`, `500`],
-    //           },
-    //         ],
-    //       },
-    //     },
-    //   },
-    // },
     "gatsby-plugin-offline",
   ],
 }

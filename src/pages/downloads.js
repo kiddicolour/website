@@ -2,26 +2,19 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import DrawingsComponent from "../components/drawings"
-import Layout from "../components/layout"
-
-export const query = graphql`
-  query Downloads {
-    downloads: allStrapiDownload {
-      edges {
-        node {
-          id
-          title
-        }
-      }
-    }
-  }
-`
+import { Layout, SEO } from 'components/common';
+import { Intro, Featured } from 'components/landing';
+import { Header } from 'components/theme';
 
 const Downloads = ({ data }) => {
   const downloads = data.downloads.edges
 
   return (
     <Layout>
+      <SEO />
+      <Intro />
+      <Header />
+      <Featured />
       <div className="uk-section">
         <div className="uk-container uk-container-large">
           <h1>Downloads</h1>
@@ -40,5 +33,18 @@ const Downloads = ({ data }) => {
     </Layout>
   )
 }
+
+export const query = graphql`
+  query Downloads {
+    downloads: allStrapiDownload {
+      edges {
+        node {
+          id
+          title
+        }
+      }
+    }
+  }
+`
 
 export default Downloads

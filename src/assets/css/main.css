@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: 'KiddiRegular';
   src: local('KiddiRegular'), url(../../fonts/Kiddi2020_Regular3_2.ttf) format('truetype');
 }
@@ -65,3 +65,4 @@ img:hover {
   opacity: 1 !important;
   transition: opacity 0.25s cubic-bezier(0.39, 0.575, 0.565, 1) !important;
 }
+ */
