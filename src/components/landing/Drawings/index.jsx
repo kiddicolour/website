@@ -11,7 +11,7 @@ export const Drawings = () => {
   const {
     drawings: {
       edges
-    } 
+    }
   } = useStaticQuery(
     graphql`
     {
@@ -20,9 +20,10 @@ export const Drawings = () => {
           node {
             strapiId
             title
+            slug
             description
             image {
-              url
+              publicURL
             }
             themes {
               name

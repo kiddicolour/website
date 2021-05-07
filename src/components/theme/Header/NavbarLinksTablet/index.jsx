@@ -170,7 +170,7 @@ const SubItems = (query, currentNavItem, navItem) => {
                                         }}
                                         href={["/", navItem, "/", item.node.name.replace(/ /g, "-").toLowerCase()].join('')}
                                     >
-                                        <div className={["navIcon", item.node.icon_class].join(' ')}></div>
+                                        <div className={["navIcon", item.node.iconClass].join(' ')}></div>
                                         <p>{item.node.name}</p>
                                     </MenuSubItemWrapper>
                                 </OddWrapper>
@@ -189,7 +189,7 @@ const SubItems = (query, currentNavItem, navItem) => {
                                     key={index}
                                     href={["/", navItem, "/", item.node.name.replace(/ /g, "-").toLowerCase()].join('')}
                                 >
-                                    <div className={["navIcon", item.node.icon_class].join(' ')}></div>
+                                    <div className={["navIcon", item.node.iconClass].join(' ')}></div>
                                     <p>{item.node.name}</p>
                                 </MenuSubItemWrapper>
                             )
@@ -232,33 +232,33 @@ const query = graphql`
             edges {
                 node {
                     name
-                    icon_class
-                    audio
+                    iconClass
+                    menuAudio
                 }
             }
         }
-        types: allStrapiType(filter: {strapiParent: {name: {eq: "types"}}}, sort: {fields: menu_order, order: ASC}) {
+        types: allStrapiType(filter: {strapiParent: {name: {eq: "types"}}}, sort: {fields: menuOrder, order: ASC}) {
             edges {
                 node {
                     name
-                    icon_class
-                    audio
+                    iconClass
+                    menuAudio
                     strapiChildren {
                         name
-                        icon_class
+                        iconClass
                     }
                 }
             }
         }
-        themes: allStrapiTheme(filter: {strapiParent: {name: {eq: "themes"}}}, sort: {fields: menu_order, order: ASC}) {
+        themes: allStrapiTheme(filter: {strapiParent: {name: {eq: "themes"}}}, sort: {fields: menuOrder, order: ASC}) {
             edges {
                 node {
                     name
-                    icon_class
-                    audio
+                    iconClass
+                    menuAudio
                     strapiChildren {
                         name
-                        icon_class
+                        iconClass
                     }
                 }
             }

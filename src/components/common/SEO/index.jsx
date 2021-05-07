@@ -19,11 +19,11 @@ import {
 } from 'data/config';
 
 export const SEO = ({ seo = {}, title = defaultTitle, description = defaultDescription, location = '' }) => {
-  
+
   const { strapiGlobal } = useStaticQuery(querySEO);
-  const { defaultSeo, siteName, introduction } = strapiGlobal;
-  
-  const structuredDataOrganization = `{ 
+  const defaultSeo = strapiGlobal.seo;
+
+  const structuredDataOrganization = `{
 		"@context": "http://schema.org",
 		"@type": "Organization",
 		"legalName": "${legalName}",
@@ -105,16 +105,19 @@ SEO.defaultProps = {
 export const querySEO = graphql`
   query {
     strapiGlobal {
-      siteName
-      introduction
-      defaultSeo {
-        title
-        description
-        keywords
+      title
+      description
+      seo {
+        meta {
+          title
+          description
+          keywords {
+            name
+          }
+        }
         shareImage {
-          alt
           image {
-            url
+            publicURL
           }
         }
       }
@@ -125,7 +128,7 @@ export const querySEO = graphql`
 export const composeSEO = (general, specific) => {
   // Merge default and page-specific SEO values
   const seo = { ...general, ...specific };
-  
+
   const tags = getMetaTags(seo)
 
   return { ...seo, tags: tags }

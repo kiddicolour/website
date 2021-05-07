@@ -14,7 +14,7 @@ export const Featured = () => {
       } = useStaticQuery(
         graphql`
           {
-            features: allStrapiFeature {
+            features: allStrapiFeatured {
               edges {
                 node {
                   strapiId
@@ -25,15 +25,7 @@ export const Featured = () => {
                     title
                     description
                     image {
-                      url
-                    }
-                  }
-                  download {
-                    id
-                    title
-                    description
-                    file {
-                      url
+                      publicURL
                     }
                   }
                   theme {

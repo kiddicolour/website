@@ -11,11 +11,11 @@ export const Projects = () => {
   const {
     drawings: {
       edges
-    } 
+    }
   } = useStaticQuery(
     graphql`
     {
-      drawings: allStrapiFeature {
+      drawings: allStrapiFeatured {
         edges {
           node {
             strapiId

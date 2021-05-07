@@ -9,8 +9,9 @@ export const Intro = () => {
   const { theme } = useContext(ThemeContext)
 
   const { strapiGlobal } = useStaticQuery(querySEO)
-  const { defaultSeo, siteName, introduction } = strapiGlobal
-  const seo = composeSEO(defaultSeo, siteName)
+  const { title, introduction } = strapiGlobal
+  const defaultSeo = strapiGlobal.seo
+  const seo = composeSEO(defaultSeo, title)
 
   return (
     <IntroWrapper as={Container}>

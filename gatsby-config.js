@@ -33,14 +33,15 @@ module.exports = {
         apiURL: backend_route,
         contentTypes: [
           // List of the Content Types you want to be able to request from Gatsby.
-          "drawing",
           "age",
+          "tag",
           "theme",
           "type",
-          /* "download",
-          "feature", */
+          "drawing",
+          "download",
+          "featured"
         ],
-        /* singleTypes: ["global", "seo"], */
+        singleTypes: ["global"],
         queryLimit: 1000,
       },
     },

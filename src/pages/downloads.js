@@ -41,6 +41,12 @@ export const query = graphql`
         node {
           id
           title
+          file {
+            publicURL
+          }
+          preview {
+            publicURL
+          }
         }
       }
     }

@@ -17,7 +17,7 @@ export const query = graphql`
             name
           }
           image {
-            url
+            publicURL
           }
           themes {
             name

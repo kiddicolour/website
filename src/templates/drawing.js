@@ -12,7 +12,8 @@ export const query = graphql`
   query DrawingQuery($id: Int!) {
     strapiDrawing(strapiId: { eq: $id } ) {
       strapiId
-      name
+      title
+      description
       image {
         publicURL
       }

@@ -41,7 +41,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
-        themes: allStrapiTheme(filter: {strapiParent: {name: {eq: "themes"}}}) {
+        themes: allStrapiTheme {
           edges {
             node {
               strapiId
@@ -53,7 +53,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
-        types: allStrapiType(filter: {strapiParent: {name: {eq: "types"}}}) {
+        types: allStrapiType {
           edges {
             node {
               strapiId
@@ -62,6 +62,30 @@ exports.createPages = async ({ graphql, actions }) => {
                 name
                 id
               }
+            }
+          }
+        }
+        tags: allStrapiTag {
+          edges {
+            node {
+              strapiId
+              name
+            }
+          }
+        }
+        downloads: allStrapiDownload {
+          edges {
+            node {
+              strapiId
+              title
+            }
+          }
+        }
+        featured: allStrapiFeatured {
+          edges {
+            node {
+              strapiId
+              title
             }
           }
         }
@@ -84,7 +108,7 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
-  
+
   // Create age pages.
   const ages = result.data.ages.edges
   ages.forEach((age, index) => {
@@ -139,7 +163,7 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-/*   // Create download pages.
+  // Create download pages.
   const downloads = result.data.downloads.edges
   downloads.forEach((download, index) => {
     createPage({
@@ -149,5 +173,5 @@ exports.createPages = async ({ graphql, actions }) => {
         id: download.node.strapiId,
       },
     })
-  }) */
+  })
 }
