@@ -10,6 +10,9 @@ export const Wrapper = styled.div`
     // height: 48px;
 `;
 
+export const OddWrapper = styled.div`
+    width: 100%;
+`;
 export const WrapperLinks = styled.div`
     display: flex;
     align-items: center;

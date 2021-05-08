@@ -1,57 +1,38 @@
 import { graphql, useStaticQuery } from 'gatsby';
-import React, { Link, useEffect } from 'react';
-import { useLocation } from '@reach/router';
+import React, { useEffect } from 'react';
+import AudibleLink from '../NavbarLinks/AudibleLink'
+import { Link } from 'gatsby'
 import { NavbarContainer } from 'components/common';
 import { Wrapper, MenuItemWrapper, MenuIconWrapper, MenuIcon , SubItemsWrapper, MenuSubItemsWrapper, OddWrapper , MenuSubItemWrapper } from './styles';
 import '../NavbarLinks/styles.css';
-import { bell1Audio, bell2Audio, bell3Audio, bell4Audio, bellsAudio, guiroAudio, honkAudio, pop1Audio, pop2Audio, tom1Audio, tom2Audio, whistle1Audio, whistle2Audio } from '../NavbarLinks/audio.js';
 
-const audioItems = [['bell1Audio', bell1Audio], ['bell2Audio', bell2Audio], ['bell3Audio', bell3Audio], ['bell4Audio', bell4Audio], ['bellsAudio', bellsAudio], ['guiroAudio', guiroAudio], ['honkAudio', honkAudio], ['pop1Audio', pop1Audio], ['pop2Audio', pop2Audio], ['tom1Audio', tom1Audio], ['tom2Audio', tom2Audio], ['whistle1Audio', whistle1Audio], ['whistle2Audio', whistle2Audio]];
-
-const NavbarLinksMobile = ({ currentNavItem, setCurrentNavItem }) => {
-
-    /* GIVES useContext error */
-    /* let location = useLocation(); */
+const NavbarLinksMobile = ({ currentNavItem, setCurrentNavItem, handleClick }) => {
 
     const wrapperSetCurrentNavItem = val => {
         setCurrentNavItem(currentNavItem === val ? '' : val);
     }
 
-    useEffect(() => {
-        bell1Audio.currentTime = 0;
-        bell1Audio.play();
-    }, [currentNavItem]);
-
     return (
         <Wrapper>
             <MenuItemWrapper
-                as={Link}
-                onClick={(e) => {
-                    e.preventDefault();
-                    /* bell1Audio.currentTime = 0;
-                    bell1Audio.play(); */
-                    setTimeout(() => {
-                        window.location.href = "/";
-                    }, 1000);
-                }}
-                href="/"
+                as={AudibleLink}
+                audio="bell1"
+                handleClick={handleClick}
+                to="/"
             >
                 <MenuIconWrapper>
                     <MenuIcon className="navIcon mobile home" />
                 </MenuIconWrapper>
             </MenuItemWrapper>
             <MenuItemWrapper
-                onClick={(e) => {
-                    e.preventDefault();
-                    bell2Audio.currentTime = 0;
-                    bell2Audio.play();
-                    wrapperSetCurrentNavItem('age');
-                }}
+                as={AudibleLink}
+                handleClick={handleClick}
+                audio="bell2"
             >
                 <MenuIconWrapper className={`${currentNavItem === 'age' ? "active" : ""}`}>
                     <MenuIcon className="navIcon mobile age" />
                 </MenuIconWrapper>
-                {SubItems(query, currentNavItem, 'age')}
+                {SubItems(query, currentNavItem, 'age', handleClick)}
             </MenuItemWrapper>
             <MenuItemWrapper
                 onClick={(e) => {
@@ -138,76 +119,6 @@ const NavbarLinksMobile = ({ currentNavItem, setCurrentNavItem }) => {
             </MenuItemWrapper>
         </Wrapper>
     );
-}
-
-const SubItems = (query, currentNavItem, navItem) => {
-    if (currentNavItem === navItem) {
-        var items;
-        if (navItem === 'age') {
-            items = useStaticQuery(query).ages;
-        } else if (navItem === 'type') {
-            items = useStaticQuery(query).types;
-        } else if (navItem === 'theme') {
-            items = useStaticQuery(query).themes;
-        }
-        const odd = (items.edges.length % 2 === 0) ? false : true;
-        return (
-            <SubItemsWrapper onClick={(e) => e.stopPropagation()}>
-                <MenuSubItemsWrapper as={NavbarContainer}>
-                    {items.edges.map((item, index) => {
-                        var audio;
-                        audioItems.forEach(audioItem => {
-                            if (item.node.audio === audioItem[0]) {
-                                audio = audioItem[1];
-                            }
-                        });
-                        if (index === 0 && odd) {
-                            return (
-                                <OddWrapper key={index} >
-                                    <MenuSubItemWrapper
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            audio.currentTime = 0;
-                                            audio.play();
-                                            setTimeout(() => {
-                                                window.location.href = ["/", navItem, "/", item.node.name.replace(/ /g, "-").toLowerCase()].join('');
-                                            }, 1000);
-                                        }}
-                                        href={["/", navItem, "/", item.node.name.replace(/ /g, "-").toLowerCase()].join('')}
-                                    >
-                                        <MenuIconWrapper>
-                                            <MenuIcon className={["navIcon", item.node.iconClass].join(' ')} />
-                                        </MenuIconWrapper>
-                                        <p>{item.node.name}</p>
-                                    </MenuSubItemWrapper>
-                                </OddWrapper>
-                            )
-                        } else {
-                            return (
-                                <MenuSubItemWrapper
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        audio.currentTime = 0;
-                                        audio.play();
-                                        setTimeout(() => {
-                                            window.location.href = ["/", navItem, "/", item.node.name.replace(/ /g, "-").toLowerCase()].join('');
-                                        }, 1000);
-                                    }}
-                                    key={index}
-                                    href={["/", navItem, "/", item.node.name.replace(/ /g, "-").toLowerCase()].join('')}
-                                >
-                                    <MenuIconWrapper>
-                                        <MenuIcon className={["navIcon", item.node.iconClass].join(' ')} />
-                                    </MenuIconWrapper>
-                                    <p>{item.node.name}</p>
-                                </MenuSubItemWrapper>
-                            )
-                        }
-                    })}
-                </MenuSubItemsWrapper>
-            </SubItemsWrapper>
-        )
-    }
 }
 
 const SearchBar = (currentNavItem) => {

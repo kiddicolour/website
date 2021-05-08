@@ -1,10 +1,11 @@
 import React, { useCallback, useState } from 'react';
-import NavbarLinksMobile from '../NavbarLinksMobile';
-import NavbarLinksTablet from '../NavbarLinksTablet';
+// import NavbarLinksMobile from '../NavbarLinksMobile';
+// import NavbarLinksTablet from '../NavbarLinksTablet';
 import NavbarLinksDesktop from '../NavbarLinksDesktop';
 import './styles.css';
 
-const NavbarLinks = ({ device }) => {
+const NavbarLinks = ({ device, handleClick, menu }) => {
+
     const [currentNavItem, setCurrentNavItem] = useState('');
 
     const wrapperSetCurrentNavItem = val => {
@@ -13,9 +14,24 @@ const NavbarLinks = ({ device }) => {
 
     return (
         <>
-        {device === "mobile" && <NavbarLinksMobile currentNavItem={currentNavItem} setCurrentNavItem={wrapperSetCurrentNavItem} />}  
-        {device === "tablet" && <NavbarLinksTablet currentNavItem={currentNavItem} setCurrentNavItem={wrapperSetCurrentNavItem} />}  
-        {device === "desktop" && <NavbarLinksDesktop currentNavItem={currentNavItem} setCurrentNavItem={wrapperSetCurrentNavItem} />}  
+            {device === "mobile" && <NavbarLinksDesktop
+              menu={menu}
+              currentNavItem={currentNavItem}
+              handleClick={handleClick}
+              setCurrentNavItem={wrapperSetCurrentNavItem}
+            />}
+            {device === "tablet" && <NavbarLinksDesktop
+              menu={menu}
+              currentNavItem={currentNavItem}
+              handleClick={handleClick}
+              setCurrentNavItem={wrapperSetCurrentNavItem}
+            />}
+            {device === "desktop" && <NavbarLinksDesktop
+              menu={menu}
+              currentNavItem={currentNavItem}
+              handleClick={handleClick}
+              setCurrentNavItem={wrapperSetCurrentNavItem}
+            />}
         </>
     )
 }

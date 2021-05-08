@@ -1,31 +1,31 @@
 import { graphql, useStaticQuery } from 'gatsby';
-import React, { Link } from 'react';
+import React from 'react';
+import { Link } from 'gatsby'
+import AudibleLink from '../NavbarLinks/AudibleLink'
 import { NavbarContainer } from 'components/common';
 import { Wrapper, MenuItemWrapper, MenuIconWrapper, MenuIcon, SubItemsWrapper, MenuSubItemsWrapper , MenuSubItemWrapper } from './styles';
 import '../NavbarLinks/styles.css';
-import { bell1Audio, bell2Audio, bell3Audio, bell4Audio, bellsAudio, guiroAudio, honkAudio, pop1Audio, pop2Audio, tom1Audio, tom2Audio, whistle1Audio, whistle2Audio } from '../NavbarLinks/audio.js';
+import SubItems from '../Navbar/SubItems'
 
-const audioItems = [['bell1Audio', bell1Audio], ['bell2Audio', bell2Audio], ['bell3Audio', bell3Audio], ['bell4Audio', bell4Audio], ['bellsAudio', bellsAudio], ['guiroAudio', guiroAudio], ['honkAudio', honkAudio], ['pop1Audio', pop1Audio], ['pop2Audio', pop2Audio], ['tom1Audio', tom1Audio], ['tom2Audio', tom2Audio], ['whistle1Audio', whistle1Audio], ['whistle2Audio', whistle2Audio]];
+const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem, handleClick, menu }) => {
 
-const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem }) => {
+    const { ages, themes, types } = menu
 
-    const wrapperSetCurrentNavItem = val => {
-        setCurrentNavItem(val);
+    const handleMouseEnter = (kind) => {
+        setCurrentNavItem(kind)
+    }
+
+    const handleMouseLeave = () => {
+        setCurrentNavItem('')
     }
 
     return (
         <Wrapper>
             <MenuItemWrapper
-                as={Link}
-                onClick={(e) => {
-                    e.preventDefault();
-                    bell1Audio.currentTime = 0;
-                    bell1Audio.play();
-                    setTimeout(() => {
-                        window.location.href = "/";
-                    }, 1000);
-                }}
-                href="/"
+                as={AudibleLink}
+                audio="bell1"
+                handleClick={handleClick}
+                to="/"
             >
                 <MenuIconWrapper>
                     <MenuIcon className="navIcon home" />
@@ -33,8 +33,8 @@ const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem }) => {
                 <p>home</p>
             </MenuItemWrapper>
             <MenuItemWrapper
-                onMouseEnter={() => wrapperSetCurrentNavItem('age')}
-                onMouseLeave={() => wrapperSetCurrentNavItem('')}
+                onMouseEnter={() => handleMouseEnter('age')}
+                onMouseLeave={handleMouseLeave}
             >
                 <MenuIconWrapper>
                     <MenuIcon className="navIcon age" />
@@ -43,11 +43,11 @@ const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem }) => {
                 <MenuIconWrapper>
                     <MenuIcon className={`${currentNavItem === 'age' ? "dropdownIcon arrow_icon_down_black" : "dropdownIcon arrow_icon_down_white"}`} />
                 </MenuIconWrapper>
-                {SubItems(query, currentNavItem, 'age')}
+                {currentNavItem === 'age' && <SubItems items={ages} urlPrefix="/age" handleClick={handleClick} />}
             </MenuItemWrapper>
             <MenuItemWrapper
-                onMouseEnter={() => wrapperSetCurrentNavItem('type')}
-                onMouseLeave={() => wrapperSetCurrentNavItem('')}
+                onMouseEnter={() => handleMouseEnter('type')}
+                onMouseLeave={handleMouseLeave}
             >
                 <MenuIconWrapper>
                     <MenuIcon className="navIcon type" />
@@ -56,11 +56,11 @@ const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem }) => {
                 <MenuIconWrapper>
                     <MenuIcon className={`${currentNavItem === 'type' ? "dropdownIcon arrow_icon_down_black" : "dropdownIcon arrow_icon_down_white"}`} />
                 </MenuIconWrapper>
-                {SubItems(query, currentNavItem, 'type')}
+                {currentNavItem === 'type' && <SubItems items={types} urlPrefix="/type" handleClick={handleClick} />}
             </MenuItemWrapper>
             <MenuItemWrapper
-                onMouseEnter={() => wrapperSetCurrentNavItem('theme')}
-                onMouseLeave={() => wrapperSetCurrentNavItem('')}
+                onMouseEnter={() => handleMouseEnter('theme')}
+                onMouseLeave={handleMouseLeave}
             >
                 <MenuIconWrapper>
                     <MenuIcon className="navIcon theme" />
@@ -69,19 +69,13 @@ const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem }) => {
                 <MenuIconWrapper>
                     <MenuIcon className={`${currentNavItem === 'theme' ? "dropdownIcon arrow_icon_down_black" : "dropdownIcon arrow_icon_down_white"}`} />
                 </MenuIconWrapper>
-                {SubItems(query, currentNavItem, 'theme')}
+                {currentNavItem === 'theme' && <SubItems items={themes} urlPrefix="/theme" handleClick={handleClick} />}
             </MenuItemWrapper>
             <MenuItemWrapper
-                as={Link}
-                onClick={(e) => {
-                    e.preventDefault();
-                    pop1Audio.currentTime = 0;
-                    pop1Audio.play();
-                    setTimeout(() => {
-                        window.location.href = "/downloads";
-                    }, 1000);
-                }}
-                href="/downloads"
+                as={AudibleLink}
+                audio="pop1"
+                handleClick={handleClick}
+                to="/downloads"
             >
                 <MenuIconWrapper>
                     <MenuIcon className="navIcon downloads" />
@@ -89,16 +83,10 @@ const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem }) => {
                 <p>downloads</p>
             </MenuItemWrapper>
             <MenuItemWrapper
-                as={Link}
-                onClick={(e) => {
-                    e.preventDefault();
-                    whistle1Audio.currentTime = 0;
-                    whistle1Audio.play();
-                    setTimeout(() => {
-                        window.location.href = "/type/emma-and-thomas";
-                    }, 1000);
-                }}
-                href="/type/emma-and-thomas"
+                as={AudibleLink}
+                audio="whistle1"
+                handleClick={handleClick}
+                to="/type/emma-and-thomas"
             >
                 <MenuIconWrapper>
                     <MenuIcon className="navIcon type_emma_and_thomas" />
@@ -107,51 +95,6 @@ const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem }) => {
             </MenuItemWrapper>
         </Wrapper>
     );
-}
-
-const SubItems = (query, currentNavItem, navItem) => {
-    if (currentNavItem === navItem) {
-        let items;
-        if (navItem === 'age') {
-            items = useStaticQuery(query).ages;
-        } else if (navItem === 'type') {
-            items = useStaticQuery(query).types;
-        } else if (navItem === 'theme') {
-            items = useStaticQuery(query).themes;
-        }
-        const odd = (items.edges.length % 3 === 0) ? false : true;
-        return (
-            <SubItemsWrapper onClick={(e) => e.stopPropagation()}>
-                <MenuSubItemsWrapper as={NavbarContainer}>
-                    {items.edges.map((item, index) => {
-                        var audio;
-                        audioItems.forEach(audioItem => {
-                            if (item.node.audio === audioItem[0]) {
-                                audio = audioItem[1];
-                            }
-                        });
-                        return (
-                            <MenuSubItemWrapper
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    audio.currentTime = 0;
-                                    audio.play();
-                                    setTimeout(() => {
-                                        window.location.href = ["/", navItem, "/", item.node.name.replace(/ /g, "-").toLowerCase()].join('');
-                                    }, 1000);
-                                }}
-                                key={index}
-                                href={["/", navItem, "/", item.node.name.replace(/ /g, "-").toLowerCase()].join('')}
-                            >
-                                <div className={["navIcon", item.node.iconClass].join(' ')}></div>
-                                <p>{item.node.name}</p>
-                            </MenuSubItemWrapper>
-                        )
-                    })}
-                </MenuSubItemsWrapper>
-            </SubItemsWrapper>
-        )
-    } else return null;
 }
 
 const query = graphql`
