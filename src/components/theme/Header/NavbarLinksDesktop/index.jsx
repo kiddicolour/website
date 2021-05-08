@@ -1,17 +1,16 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import React from 'react';
-import { Link } from 'gatsby'
-import AudibleLink from '../NavbarLinks/AudibleLink'
 import { NavbarContainer } from 'components/common';
 import { Wrapper, MenuItemWrapper, MenuIconWrapper, MenuIcon, SubItemsWrapper, MenuSubItemsWrapper , MenuSubItemWrapper } from './styles';
 import '../NavbarLinks/styles.css';
+import AudibleLink from '../NavbarLinks/AudibleLink'
 import SubItems from '../Navbar/SubItems'
 
-const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem, handleClick, menu }) => {
+const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem, handleAudio, menu }) => {
 
     const { ages, themes, types } = menu
 
-    const handleMouseEnter = (kind) => {
+    const handleMouseEnter = (kind) => () => {
         setCurrentNavItem(kind)
     }
 
@@ -24,7 +23,7 @@ const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem, handleClick, me
             <MenuItemWrapper
                 as={AudibleLink}
                 audio="bell1"
-                handleClick={handleClick}
+                handleAudio={handleAudio}
                 to="/"
             >
                 <MenuIconWrapper>
@@ -33,8 +32,11 @@ const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem, handleClick, me
                 <p>home</p>
             </MenuItemWrapper>
             <MenuItemWrapper
-                onMouseEnter={() => handleMouseEnter('age')}
+                onMouseEnter={handleMouseEnter('age')}
                 onMouseLeave={handleMouseLeave}
+                as={AudibleLink}
+                audio="bell2"
+                handleAudio={handleAudio}
             >
                 <MenuIconWrapper>
                     <MenuIcon className="navIcon age" />
@@ -43,11 +45,14 @@ const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem, handleClick, me
                 <MenuIconWrapper>
                     <MenuIcon className={`${currentNavItem === 'age' ? "dropdownIcon arrow_icon_down_black" : "dropdownIcon arrow_icon_down_white"}`} />
                 </MenuIconWrapper>
-                {currentNavItem === 'age' && <SubItems items={ages} urlPrefix="/age" handleClick={handleClick} />}
+                {currentNavItem === 'age' && <SubItems items={ages} urlPrefix="/age" handleAudio={handleAudio} />}
             </MenuItemWrapper>
             <MenuItemWrapper
-                onMouseEnter={() => handleMouseEnter('type')}
+                onMouseEnter={handleMouseEnter('type')}
                 onMouseLeave={handleMouseLeave}
+                as={AudibleLink}
+                audio="tom1"
+                handleAudio={handleAudio}
             >
                 <MenuIconWrapper>
                     <MenuIcon className="navIcon type" />
@@ -56,11 +61,14 @@ const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem, handleClick, me
                 <MenuIconWrapper>
                     <MenuIcon className={`${currentNavItem === 'type' ? "dropdownIcon arrow_icon_down_black" : "dropdownIcon arrow_icon_down_white"}`} />
                 </MenuIconWrapper>
-                {currentNavItem === 'type' && <SubItems items={types} urlPrefix="/type" handleClick={handleClick} />}
+                {currentNavItem === 'type' && <SubItems items={types} urlPrefix="/type" handleAudio={handleAudio} />}
             </MenuItemWrapper>
             <MenuItemWrapper
-                onMouseEnter={() => handleMouseEnter('theme')}
+                onMouseEnter={handleMouseEnter('theme')}
                 onMouseLeave={handleMouseLeave}
+                as={AudibleLink}
+                audio="whistle2"
+                handleAudio={handleAudio}
             >
                 <MenuIconWrapper>
                     <MenuIcon className="navIcon theme" />
@@ -69,12 +77,12 @@ const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem, handleClick, me
                 <MenuIconWrapper>
                     <MenuIcon className={`${currentNavItem === 'theme' ? "dropdownIcon arrow_icon_down_black" : "dropdownIcon arrow_icon_down_white"}`} />
                 </MenuIconWrapper>
-                {currentNavItem === 'theme' && <SubItems items={themes} urlPrefix="/theme" handleClick={handleClick} />}
+                {currentNavItem === 'theme' && <SubItems items={themes} urlPrefix="/theme" handleAudio={handleAudio} />}
             </MenuItemWrapper>
             <MenuItemWrapper
                 as={AudibleLink}
                 audio="pop1"
-                handleClick={handleClick}
+                handleAudio={handleAudio}
                 to="/downloads"
             >
                 <MenuIconWrapper>
@@ -85,7 +93,7 @@ const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem, handleClick, me
             <MenuItemWrapper
                 as={AudibleLink}
                 audio="whistle1"
-                handleClick={handleClick}
+                handleAudio={handleAudio}
                 to="/type/emma-and-thomas"
             >
                 <MenuIconWrapper>
@@ -97,44 +105,5 @@ const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem, handleClick, me
     );
 }
 
-const query = graphql`
-    query {
-        ages: allStrapiAge(sort: {fields: id}) {
-            edges {
-                node {
-                    name
-                    iconClass
-                    menuAudio
-                }
-            }
-        }
-        types: allStrapiType(sort: {fields: menuOrder, order: ASC}) {
-            edges {
-                node {
-                    name
-                    iconClass
-                    menuAudio
-                    strapiChildren {
-                        name
-                        iconClass
-                    }
-                }
-            }
-        }
-        themes: allStrapiTheme(sort: {fields: menuOrder, order: ASC}) {
-            edges {
-                node {
-                    name
-                    iconClass
-                    menuAudio
-                    strapiChildren {
-                        name
-                        iconClass
-                    }
-                }
-            }
-        }
-    }
-`
 
 export default NavbarLinksDesktop;

@@ -1,15 +1,23 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import React, { useEffect } from 'react';
-import AudibleLink from '../NavbarLinks/AudibleLink'
 import { Link } from 'gatsby'
 import { NavbarContainer } from 'components/common';
 import { Wrapper, MenuItemWrapper, MenuIconWrapper, MenuIcon , SubItemsWrapper, MenuSubItemsWrapper, OddWrapper , MenuSubItemWrapper } from './styles';
 import '../NavbarLinks/styles.css';
+import AudibleLink from '../NavbarLinks/AudibleLink'
+import SubItems from '../Navbar/SubItems'
 
-const NavbarLinksMobile = ({ currentNavItem, setCurrentNavItem, handleClick }) => {
 
-    const wrapperSetCurrentNavItem = val => {
-        setCurrentNavItem(currentNavItem === val ? '' : val);
+const NavbarLinksMobile = ({ currentNavItem, setCurrentNavItem, handleAudio, menu }) => {
+
+    const { ages, themes, types } = menu
+
+    const handlePress = (kind) => () => {
+        if (kind === currentNavItem) {
+            setCurrentNavItem('')
+        } else {
+            setCurrentNavItem(kind)
+        }
     }
 
     return (
@@ -17,7 +25,7 @@ const NavbarLinksMobile = ({ currentNavItem, setCurrentNavItem, handleClick }) =
             <MenuItemWrapper
                 as={AudibleLink}
                 audio="bell1"
-                handleClick={handleClick}
+                handleAudio={handleAudio}
                 to="/"
             >
                 <MenuIconWrapper>
@@ -26,91 +34,71 @@ const NavbarLinksMobile = ({ currentNavItem, setCurrentNavItem, handleClick }) =
             </MenuItemWrapper>
             <MenuItemWrapper
                 as={AudibleLink}
-                handleClick={handleClick}
+                handleAudio={handleAudio}
                 audio="bell2"
+                onMouseDown={handlePress('age')}
             >
                 <MenuIconWrapper className={`${currentNavItem === 'age' ? "active" : ""}`}>
                     <MenuIcon className="navIcon mobile age" />
                 </MenuIconWrapper>
-                {SubItems(query, currentNavItem, 'age', handleClick)}
+                {currentNavItem === 'age' && <SubItems items={ages} urlPrefix="/age" handleAudio={handleAudio} />}
             </MenuItemWrapper>
             <MenuItemWrapper
-                onClick={(e) => {
-                    e.preventDefault();
-                    tom1Audio.currentTime = 0;
-                    tom1Audio.play();
-                    wrapperSetCurrentNavItem('type');
-                }}
+                as={AudibleLink}
+                handleAudio={handleAudio}
+                audio="tom1"
+                onMouseDown={handlePress('type')}
             >
                 <MenuIconWrapper className={`${currentNavItem === 'type' ? "active" : ""}`}>
                     <MenuIcon className="navIcon mobile type" />
                 </MenuIconWrapper>
-                {SubItems(query, currentNavItem, 'type')}
+                {currentNavItem === 'type' && <SubItems items={types} urlPrefix="/type" handleAudio={handleAudio} />}
             </MenuItemWrapper>
             <MenuItemWrapper
-                onClick={(e) => {
-                    e.preventDefault();
-                    whistle2Audio.currentTime = 0;
-                    whistle2Audio.play();
-                    wrapperSetCurrentNavItem('theme');
-                }}
+                as={AudibleLink}
+                handleAudio={handleAudio}
+                audio="whistle2"
+                onMouseDown={handlePress('theme')}
             >
                 <MenuIconWrapper className={`${currentNavItem === 'theme' ? "active" : ""}`}>
                     <MenuIcon className="navIcon mobile theme" />
                 </MenuIconWrapper>
-                {SubItems(query, currentNavItem, 'theme')}
+                {currentNavItem === 'theme' && <SubItems items={themes} urlPrefix="/theme" handleAudio={handleAudio} />}
             </MenuItemWrapper>
             <MenuItemWrapper
-                as={Link}
-                onClick={(e) => {
-                    e.preventDefault();
-                    pop1Audio.currentTime = 0;
-                    pop1Audio.play();
-                    setTimeout(() => {
-                        window.location.href = "/downloads";
-                    }, 1000);
-                }}
-                href="/downloads"
+                as={AudibleLink}
+                audio="pop1"
+                handleAudio={handleAudio}
+                to="/downloads"
             >
                 <MenuIconWrapper>
                     <MenuIcon className="navIcon mobile downloads" />
                 </MenuIconWrapper>
             </MenuItemWrapper>
             <MenuItemWrapper
-                as={Link}
-                onClick={(e) => {
-                    e.preventDefault();
-                    whistle1Audio.currentTime = 0;
-                    whistle1Audio.play();
-                    setTimeout(() => {
-                        window.location.href = "/type/emma-and-thomas";
-                    }, 1000);
-                }}
-                href="/type/emma-and-thomas"
+                as={AudibleLink}
+                audio="whistle1"
+                handleAudio={handleAudio}
+                to="/type/emma-and-thomas"
             >
                 <MenuIconWrapper>
                     <MenuIcon className="navIcon mobile type_emma_and_thomas" />
                 </MenuIconWrapper>
             </MenuItemWrapper>
             <MenuItemWrapper
-                onClick={(e) => {
-                    e.preventDefault();
-                    tom1Audio.currentTime = 0;
-                    tom1Audio.play();
-                    wrapperSetCurrentNavItem('filter');
-                }}
+                as={AudibleLink}
+                audio="tom1"
+                handleAudio={handleAudio}
+                to="/downloads"            
             >
                 <MenuIconWrapper className={`${currentNavItem === 'filter' ? "active" : ""}`}>
                     <MenuIcon className="navIcon mobile filter_icon" />
                 </MenuIconWrapper>
             </MenuItemWrapper>
             <MenuItemWrapper
-                onClick={(e) => {
-                    e.preventDefault();
-                    bell3Audio.currentTime = 0;
-                    bell3Audio.play();
-                    wrapperSetCurrentNavItem('search');
-                }}
+                as={AudibleLink}
+                audio="bell3"
+                handleAudio={handleAudio}
             >
                 <MenuIconWrapper className={`${currentNavItem === 'search' ? "active" : ""}`}>
                     <MenuIcon className="navIcon mobile search_icon" />
@@ -126,7 +114,7 @@ const SearchBar = (currentNavItem) => {
         return (
             <SubItemsWrapper onClick={(e) => e.stopPropagation()}>
                 <MenuSubItemsWrapper as={NavbarContainer}>
-                    <form className="searchBar">
+                    <form className="searchBar" action="#">
                         <input className="searchInput" type="text" placeholder="Search..."/>
                     </form>
                 </MenuSubItemsWrapper>
@@ -134,45 +122,5 @@ const SearchBar = (currentNavItem) => {
         )
     }
 }
-
-const query = graphql`
-    query {
-        ages: allStrapiAge(sort: {fields: id}) {
-            edges {
-                node {
-                    name
-                    iconClass
-                    menuAudio
-                }
-            }
-        }
-        types: allStrapiType(filter: {strapiParent: {name: {eq: "types"}}}, sort: {fields: menuOrder, order: ASC}) {
-            edges {
-                node {
-                    name
-                    iconClass
-                    menuAudio
-                    strapiChildren {
-                        name
-                        iconClass
-                    }
-                }
-            }
-        }
-        themes: allStrapiTheme(filter: {strapiParent: {name: {eq: "themes"}}}, sort: {fields: menuOrder, order: ASC}) {
-            edges {
-                node {
-                    name
-                    iconClass
-                    menuAudio
-                    strapiChildren {
-                        name
-                        iconClass
-                    }
-                }
-            }
-        }
-    }
-`
 
 export default NavbarLinksMobile;

@@ -4,7 +4,7 @@ import { OddWrapper } from '../Navbar/styles'
 import AudibleLink from '../NavbarLinks/AudibleLink'
 import { MenuIconWrapper, MenuIcon, SubItemsWrapper, MenuSubItemsWrapper , MenuSubItemWrapper } from '../NavbarLinksDesktop/styles';
 
-const SubItems = ({items, urlPrefix, handleClick}) => {
+const SubItems = ({items, urlPrefix, handleAudio}) => {
     
     const odd = (items.edges.length % 3 === 0) ? false : true;
 
@@ -21,7 +21,7 @@ const SubItems = ({items, urlPrefix, handleClick}) => {
                                 as={node.menuAudio ? AudibleLink : Link}
                                 to={`${urlPrefix}/${node.slug}`}
                                 audio={node.menuAudio}
-                                handleClick={handleClick}
+                                handleAudio={handleAudio}
                                 key={index}
                             >
                                 <div className={["navIcon", node.iconClass].join(' ')}></div>
@@ -36,7 +36,7 @@ const SubItems = ({items, urlPrefix, handleClick}) => {
                             as={node.menuAudio ? AudibleLink : Link}
                             to={`${urlPrefix}/${node.slug}`}
                             audio={node.menuAudio}
-                            handleClick={handleClick}
+                            handleAudio={handleAudio}
                             key={index}
                         >
                             <div className={["navIcon", node.iconClass].join(' ')}></div>

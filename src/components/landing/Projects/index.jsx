@@ -30,7 +30,7 @@ export const Projects = () => {
       <h2>Projects</h2>
       <Grid>
         {edges.map(({ node }) => (
-          <Item key={node.id} as="a" href={node.url} target="_blank" rel="noopener noreferrer" theme={theme}>
+          <Item key={node.strapiId} as="a" href={node.url} target="_blank" rel="noopener noreferrer" theme={theme}>
             <Card theme={theme}>
               <Content>
                 <h4>{node.name}</h4>

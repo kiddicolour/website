@@ -29,7 +29,7 @@ const Navbar = ({ device, menu }) => {
         })
     }, [audio])
 
-    const handleClick = (audioFile) => {
+    const handleAudio = (audioFile) => {
         setAudio(audioFile)
     }
 
@@ -44,9 +44,9 @@ const Navbar = ({ device, menu }) => {
     return (
         <Wrapper>
             <WrapperLinks as={NavbarContainer}>
-                <NavbarLinks device={device} handleClick={handleClick} menu={menu} />
+                <NavbarLinks device={device} handleAudio={handleAudio} menu={menu} />
                 <SearchBar device={device}>
-                    <form className="searchBarDesktop" action={OnSearch}>
+                    <form className="searchBarDesktop">
                         <input className="searchInputDesktop" type="text" placeholder="Search..." onChange={OnTextChange}/>
                     </form>
                 </SearchBar>

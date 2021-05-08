@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import { Wrapper } from './styles';
 
 export const Header = () => {
+
   const getWindowDimensions = () => {
     if (window.innerWidth < 768) {
       return 'mobile';
@@ -14,8 +15,15 @@ export const Header = () => {
     }
   }
   const [device, setDevice] = useState(getWindowDimensions());
-
   const menu = useStaticQuery(query)
+  // const [menu, setMenu] = useState({})
+
+  // useEffect(() => {
+  //   async function getMenu() {
+  //     setMenu(await useStaticQuery(query))
+  //   }
+  //   getMenu()
+  // }, [])
 
   const handleResize = () => {
     if (window.innerWidth < 768) {
@@ -26,6 +34,7 @@ export const Header = () => {
       setDevice('tablet');
     }
   }
+
   window.addEventListener('resize', handleResize);
 
   return (
