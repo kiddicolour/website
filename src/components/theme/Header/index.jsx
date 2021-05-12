@@ -15,15 +15,7 @@ export const Header = () => {
     }
   }
   const [device, setDevice] = useState(getWindowDimensions());
-  const menu = useStaticQuery(query)
-  // const [menu, setMenu] = useState({})
-
-  // useEffect(() => {
-  //   async function getMenu() {
-  //     setMenu(await useStaticQuery(query))
-  //   }
-  //   getMenu()
-  // }, [])
+  const { menu } = useStaticQuery(query)
 
   const handleResize = () => {
     if (window.innerWidth < 768) {
