@@ -1,10 +1,10 @@
-import React from "react"
-import { graphql } from "gatsby"
+import React from 'react'
+import { graphql } from 'gatsby'
 
-import DrawingsComponent from "../components/drawings"
-import { Layout, SEO } from 'components/common';
-import { Intro, Featured } from 'components/landing';
-import { Header } from 'components/theme';
+import DrawingsComponent from '../components/drawings'
+import { Layout, SEO } from 'components/common'
+import { Intro, Featured } from 'components/landing'
+import { Header } from 'components/theme'
 
 const Downloads = ({ data }) => {
   const downloads = data.downloads.edges
@@ -20,12 +20,10 @@ const Downloads = ({ data }) => {
           <h1>Downloads</h1>
           {/* <DrawingsComponent drawings={downloads} /> */}
           {downloads.map((download, index) => {
-              return (
-                <ul>
-                    <li>
-                    {download.node.title}
-                    </li>
-                </ul>
+            return (
+              <ul>
+                <li>{download.node.title}</li>
+              </ul>
             )
           })}
         </div>
@@ -42,10 +40,10 @@ export const query = graphql`
           id
           title
           file {
-            publicURL
+            url
           }
           preview {
-            publicURL
+            url
           }
         }
       }

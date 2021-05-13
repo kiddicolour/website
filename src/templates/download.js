@@ -1,23 +1,23 @@
-import React from "react"
-import { graphql } from "gatsby"
+import React from 'react'
+import { graphql } from 'gatsby'
 
-import ReactMarkdown from "react-markdown"
-import Moment from "react-moment"
+import ReactMarkdown from 'react-markdown'
+import Moment from 'react-moment'
 
-import { Layout, SEO } from 'components/common';
-import { Intro } from 'components/landing';
-import { Header } from 'components/theme';
+import { Layout, SEO } from 'components/common'
+import { Intro } from 'components/landing'
+import { Header } from 'components/theme'
 
 export const query = graphql`
   query DownloadQuery($id: Int!) {
-    strapiDownload(strapiId: { eq: $id } ) {
+    strapiDownload(strapiId: { eq: $id }) {
       strapiId
       title
       preview {
-        publicURL
+        url
       }
       file {
-        publicURL
+        url
       }
     }
   }
@@ -34,8 +34,8 @@ const Download = ({ data }) => {
         <div
           id="banner"
           className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
-          data-src={download.image.publicURL}
-          data-srcset={download.image.publicURL}
+          data-src={download.image.url}
+          data-srcset={download.image.url}
           data-uk-img
         >
           <h1>{download.title}</h1>

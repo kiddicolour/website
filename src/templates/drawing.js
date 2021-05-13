@@ -1,21 +1,21 @@
-import React from "react"
-import { graphql } from "gatsby"
+import React from 'react'
+import { graphql } from 'gatsby'
 
-import ReactMarkdown from "react-markdown"
-import Moment from "react-moment"
+import ReactMarkdown from 'react-markdown'
+import Moment from 'react-moment'
 
-import { Layout, SEO } from 'components/common';
-import { Intro } from 'components/landing';
-import { Header } from 'components/theme';
+import { Layout, SEO } from 'components/common'
+import { Intro } from 'components/landing'
+import { Header } from 'components/theme'
 
 export const query = graphql`
   query DrawingQuery($id: Int!) {
-    strapiDrawing(strapiId: { eq: $id } ) {
+    strapiDrawing(strapiId: { eq: $id }) {
       strapiId
       title
       description
       image {
-        publicURL
+        url
       }
     }
   }
@@ -32,8 +32,8 @@ const Drawing = ({ data }) => {
         <div
           id="banner"
           className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
-          data-src={drawing.image.publicURL}
-          data-srcset={drawing.image.publicURL}
+          data-src={drawing.image.url}
+          data-srcset={drawing.image.url}
           data-uk-img
         >
           <h1>{drawing.title}</h1>
