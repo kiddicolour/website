@@ -1,14 +1,16 @@
-import React from "react"
-import { graphql } from "gatsby"
+import React from 'react'
+import { graphql } from 'gatsby'
 
-import DrawingsComponent from "../components/drawings"
-import { Layout, SEO } from 'components/common';
-import { Intro, Featured } from 'components/landing';
-import { Header } from 'components/theme';
+import DrawingsComponent from '../components/drawings'
+import { Layout, SEO } from 'components/common'
+import { Intro, Featured } from 'components/landing'
+import { Header } from 'components/theme'
 
 export const query = graphql`
   query Theme($id: Int!) {
-    drawings: allStrapiDrawing(filter: { themes: { elemMatch: { id: { eq: $id } } } }) {
+    drawings: allStrapiDrawing(
+      filter: { themes: { elemMatch: { id: { eq: $id } } } }
+    ) {
       edges {
         node {
           id
@@ -17,7 +19,7 @@ export const query = graphql`
             name
           }
           image {
-            publicURL
+            url
           }
           themes {
             name
@@ -28,7 +30,7 @@ export const query = graphql`
         }
       }
     }
-    theme: strapiTheme(strapiId: { eq: $id } ) {
+    theme: strapiTheme(strapiId: { eq: $id }) {
       name
     }
   }
