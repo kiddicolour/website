@@ -3,8 +3,8 @@ import { graphql } from 'gatsby'
 
 import DrawingsComponent from '../components/drawings'
 import { Layout, SEO } from 'components/common'
-import { Intro, Featured } from 'components/landing'
-import { Header } from 'components/theme'
+import { Featured } from 'components/landing'
+import { Header } from 'components/common'
 
 // (filter: { ages: { id: { eq: $id } } })
 
@@ -45,7 +45,6 @@ const Age = ({ data }) => {
   return (
     <Layout>
       <SEO />
-      <Intro />
       <Header />
       <Featured />
       <div className="uk-section">

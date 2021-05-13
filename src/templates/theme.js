@@ -3,8 +3,8 @@ import { graphql } from 'gatsby'
 
 import DrawingsComponent from '../components/drawings'
 import { Layout, SEO } from 'components/common'
-import { Intro, Featured } from 'components/landing'
-import { Header } from 'components/theme'
+import { Featured } from 'components/landing'
+import { Header } from 'components/common'
 
 export const query = graphql`
   query Theme($id: Int!) {
@@ -43,7 +43,6 @@ const Theme = ({ data }) => {
   return (
     <Layout>
       <SEO />
-      <Intro />
       <Header />
       <Featured />
       <div className="uk-section">

@@ -1,9 +1,26 @@
+import React, { useState, useContext } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import React, { useState, useEffect } from 'react'
 import Navbar from './Navbar'
-import { Wrapper } from './styles'
+import { ThemeContext } from 'providers/ThemeProvider';
+import { LanguageContext } from 'providers/LanguageProvider';
+import { Container, LanguageSelect } from 'components/common';
+import { Wrapper, IntroWrapper, Details, Thumbnail } from './styles';
+import { composeSEO, querySEO } from 'components/common/SEO'
+import useLanguage from '../../../hooks/useLanguage';
 
-export const Header = () => {
+
+export const Header = ({ lang = 'nl' }) => {
+
+  const { theme } = useContext(ThemeContext)
+  const { language, setLanguage } = useContext(LanguageContext)
+
+  console.log('language', language)
+
+  const { strapiGlobal } = useStaticQuery(querySEO)
+  const { title, introduction } = strapiGlobal
+  const defaultSeo = strapiGlobal.seo
+  const seo = composeSEO(defaultSeo, { title })
+
   const getWindowDimensions = () => {
     if (window.innerWidth < 768) {
       return 'mobile'
@@ -29,9 +46,18 @@ export const Header = () => {
   window.addEventListener('resize', handleResize)
 
   return (
-    <Wrapper>
-      <Navbar device={device} menu={menu} />
-    </Wrapper>
+    <>
+      <IntroWrapper as={Container}>
+        <LanguageSelect lang={language} onChange={setLanguage}/>
+        <Details theme={theme}>
+          <h1>{seo.title}</h1>
+          <h4>{introduction}</h4>
+        </Details>
+      </IntroWrapper>
+      <Wrapper>
+        <Navbar device={device} menu={menu} />
+      </Wrapper>
+    </>
   )
 }
 

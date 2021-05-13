@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { NavbarContainer } from 'components/common'
-import { OddWrapper, SubItemsWrapper, MenuSubItemsWrapper , MenuSubItemWrapper } from '../Navbar/styles'
+import { OddWrapper, SubItemsWrapper, MenuSubItemsWrapper , MenuSubItemWrapper } from './styles'
 import AudibleLink from '../NavbarLinks/AudibleLink'
 /* import { SubItemsWrapper, MenuSubItemsWrapper , MenuSubItemWrapper } from '../NavbarLinksDesktop/styles' */
 

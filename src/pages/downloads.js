@@ -3,8 +3,8 @@ import { graphql } from 'gatsby'
 
 import DrawingsComponent from '../components/drawings'
 import { Layout, SEO } from 'components/common'
-import { Intro, Featured } from 'components/landing'
-import { Header } from 'components/theme'
+import { Featured } from 'components/landing'
+import { Header } from 'components/common'
 
 const Downloads = ({ data }) => {
   const downloads = data.downloads.edges
@@ -12,7 +12,6 @@ const Downloads = ({ data }) => {
   return (
     <Layout>
       <SEO />
-      <Intro />
       <Header />
       <Featured />
       <div className="uk-section">

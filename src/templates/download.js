@@ -5,8 +5,7 @@ import ReactMarkdown from 'react-markdown'
 import Moment from 'react-moment'
 
 import { Layout, SEO } from 'components/common'
-import { Intro } from 'components/landing'
-import { Header } from 'components/theme'
+import { Header } from 'components/common'
 
 export const query = graphql`
   query DownloadQuery($id: Int!) {
@@ -28,7 +27,6 @@ const Download = ({ data }) => {
   return (
     <Layout>
       <SEO />
-      <Intro />
       <Header />
       <div>
         <div
