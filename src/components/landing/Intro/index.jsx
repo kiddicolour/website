@@ -11,14 +11,14 @@ export const Intro = () => {
   const { strapiGlobal } = useStaticQuery(querySEO)
   const { title, introduction } = strapiGlobal
   const defaultSeo = strapiGlobal.seo
-  const seo = composeSEO(defaultSeo, title)
+  const seo = composeSEO(defaultSeo, { title })
 
   return (
     <IntroWrapper as={Container}>
-        <Details theme={theme}>
-          <h1>{seo.title}</h1>
-          <h4>{introduction}</h4>
-        </Details>
-      </IntroWrapper>
+      <Details theme={theme}>
+        <h1>{seo.title}</h1>
+        <h4>{introduction}</h4>
+      </Details>
+    </IntroWrapper>
   );
 };

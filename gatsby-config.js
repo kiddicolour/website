@@ -1,7 +1,7 @@
 const config = require("platformsh-config").config();
 
 var backend_route = "";
-if ( config.isValidPlatform() ) {
+if (config.isValidPlatform()) {
   require("dotenv").config({
     path: `.env.${process.env.NODE_ENV}`,
   })
@@ -39,7 +39,8 @@ module.exports = {
           "type",
           "drawing",
           "download",
-          "featured"
+          "featured",
+          "menu"
         ],
         singleTypes: ["global"],
         queryLimit: 1000,
