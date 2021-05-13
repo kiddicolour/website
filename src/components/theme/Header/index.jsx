@@ -1,7 +1,7 @@
-import { graphql, useStaticQuery } from 'gatsby';
-import React, { useState, useEffect } from 'react';
-import Navbar from './Navbar';
-import { Wrapper } from './styles';
+import { graphql, useStaticQuery } from 'gatsby'
+import React, { useState, useEffect } from 'react'
+import Navbar from './Navbar'
+import { Wrapper } from './styles'
 
 export const Header = () => {
 
@@ -46,7 +46,7 @@ export const Header = () => {
 
 const query = graphql`
     query {
-        ages: allStrapiAge(sort: {fields: id}) {
+        ages: allStrapiAge(sort: {fields: menuOrder, order: ASC}) {
             edges {
                 node {
                     name
@@ -56,7 +56,7 @@ const query = graphql`
                 }
             }
         }
-        types: allStrapiType(sort: {fields: menuOrder, order: ASC}) {
+        types: allStrapiType(filter: {strapiParent: {name: {eq: "types"}}}, sort: {fields: menuOrder, order: ASC}) {
             edges {
                 node {
                     name
@@ -71,7 +71,7 @@ const query = graphql`
                 }
             }
         }
-        themes: allStrapiTheme(sort: {fields: menuOrder, order: ASC}) {
+        themes: allStrapiTheme(filter: {strapiParent: {name: {eq: "themes"}}}, sort: {fields: menuOrder, order: ASC}) {
             edges {
                 node {
                     name

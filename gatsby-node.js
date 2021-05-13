@@ -113,7 +113,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const ages = result.data.ages.edges
   ages.forEach((age, index) => {
     createPage({
-      path: `/age/${age.node.name.replace(/ /g, "-").toLowerCase()}`,
+      path: `/leeftijd/${age.node.name.replace(/ /g, "-").toLowerCase()}`,
       component: require.resolve("./src/templates/age.js"),
       context: {
         id: age.node.strapiId,
@@ -125,7 +125,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const themes = result.data.themes.edges
   themes.forEach((theme, index) => {
     createPage({
-      path: `/theme/${theme.node.name.replace(/ /g, "-").toLowerCase()}`,
+      path: `/thema/${theme.node.name.replace(/ /g, "-").toLowerCase()}`,
       component: require.resolve("./src/templates/theme.js"),
       context: {
         id: theme.node.strapiId,
@@ -133,7 +133,7 @@ exports.createPages = async ({ graphql, actions }) => {
     })
     theme.node.strapiChildren.forEach((subtheme, index) => {
       createPage({
-        path: `/theme/${theme.node.name.replace(/ /g, "-").toLowerCase()}/${subtheme.name.replace(/ /g, "-").toLowerCase()}`,
+        path: `/thema/${theme.node.name.replace(/ /g, "-").toLowerCase()}/${subtheme.name.replace(/ /g, "-").toLowerCase()}`,
         component: require.resolve("./src/templates/theme.js"),
         context: {
           id: subtheme.id,

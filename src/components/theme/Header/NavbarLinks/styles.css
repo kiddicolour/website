@@ -139,10 +139,6 @@
     background-size: 72%;
 }
 
-.theme_animals {
-    background-image: url('../../../../images/icons/D_theme_animals.png');
-}
-
 .theme_sport {
     background-image: url('../../../../images/icons/D_theme_sport.png');
     background-size: 68%;
@@ -214,6 +210,13 @@
     color: #999999;
 }
 
+/* TABLET */
+@media only screen and (max-width: 991px) {
+    .navIcon {
+        background-position: center;
+    }
+}
+
 /* MOBILE <= 425px */
 @media only screen and (max-width: 425px) {
     .searchInput {
@@ -226,7 +229,7 @@
     .navIcon {
         width: 40px;
         height: 40px;
-        background-position-x: center;
+        /* background-position-x: center; */
     }
 
     .searchBar {

@@ -115,11 +115,6 @@ export const querySEO = graphql`
             name
           }
         }
-        shareImage {
-          image {
-            publicURL
-          }
-        }
       }
     }
   }

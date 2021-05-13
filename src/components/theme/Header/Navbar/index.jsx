@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { NavbarContainer } from 'components/common';
-import { Wrapper, WrapperLinks, SearchBar } from './styles';
-import NavbarLinks from '../NavbarLinks';
-import './styles.css';
-import audioElements from './audio';
+import React, { useEffect, useState } from 'react'
+import { NavbarContainer } from 'components/common'
+import { Wrapper, WrapperLinks, SearchBar } from './styles'
+import NavbarLinks from '../NavbarLinks'
+import './styles.css'
+import audioElements from './audio'
 
 
 const Navbar = ({ device, menu }) => {
@@ -55,4 +55,4 @@ const Navbar = ({ device, menu }) => {
     );
 }
 
-export default Navbar;
+export default Navbar

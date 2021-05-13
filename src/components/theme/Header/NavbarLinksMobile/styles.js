@@ -38,46 +38,6 @@ export const MenuIcon = styled.div`
     margin: auto;
 `;
 
-export const SubItemsWrapper = styled.div`
-    position: absolute;
-    top: none;
-    bottom: 48px;
-    left: 0;
-    width: 100%;
-
-    @media screen and (max-width: 375px) {
-        bottom: 40px;
-    }
-`;
-
-export const MenuSubItemsWrapper = styled.div`
-    background-color: ${secondary};
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    min-height: 48px;
-
-    p {
-        font-family: 'KiddiRegular';
-    }
-
-    @media screen and (max-width: 375px) {
-        min-height: 40px;
-
-        p {
-            padding-left: 0px;
-            padding-right: 6px;
-        }
-    }
-`;
-
 export const OddWrapper = styled.div`
     width: 100%;
-`;
-
-export const MenuSubItemWrapper = styled.a`
-    width: 50%;
-    display: flex;
-    align-items: center;
-    color: ${textPrimary};
 `;

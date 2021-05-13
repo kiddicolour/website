@@ -1,15 +1,21 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import { NavbarContainer } from 'components/common'
-import { OddWrapper } from '../Navbar/styles'
+import { OddWrapper, SubItemsWrapper, MenuSubItemsWrapper , MenuSubItemWrapper } from '../Navbar/styles'
 import AudibleLink from '../NavbarLinks/AudibleLink'
-import { MenuIconWrapper, MenuIcon, SubItemsWrapper, MenuSubItemsWrapper , MenuSubItemWrapper } from '../NavbarLinksDesktop/styles';
+/* import { SubItemsWrapper, MenuSubItemsWrapper , MenuSubItemWrapper } from '../NavbarLinksDesktop/styles' */
 
-const SubItems = ({items, urlPrefix, handleAudio}) => {
+const SubItems = ({ device, items, urlPrefix, handleAudio }) => {
     
-    const odd = (items.edges.length % 3 === 0) ? false : true;
+    let odd = false;
+    if (device === 'tablet') {
+        odd = (items.edges.length % 3 === 0) ? false : true;
+    } else if (device === 'mobile') {
+        odd = (items.edges.length % 2 === 0) ? false : true;
+    }
 
     return (
-        <SubItemsWrapper onClick={(e) => e.stopPropagation()}>
+        <SubItemsWrapper device={device} onClick={(e) => e.stopPropagation()}>
             <MenuSubItemsWrapper as={NavbarContainer}>
                 {items.edges.map((item, index) => {
                     const { node } = item
@@ -23,6 +29,7 @@ const SubItems = ({items, urlPrefix, handleAudio}) => {
                                 audio={node.menuAudio}
                                 handleAudio={handleAudio}
                                 key={index}
+                                onMouseDown={(e) => e.stopPropagation()}
                             >
                                 <div className={["navIcon", node.iconClass].join(' ')}></div>
                                 <p>{node.name}</p>
@@ -33,11 +40,13 @@ const SubItems = ({items, urlPrefix, handleAudio}) => {
 
                     return (
                         <MenuSubItemWrapper
+                            device={device}
                             as={node.menuAudio ? AudibleLink : Link}
                             to={`${urlPrefix}/${node.slug}`}
                             audio={node.menuAudio}
                             handleAudio={handleAudio}
                             key={index}
+                            onMouseDown={(e) => e.stopPropagation()}
                         >
                             <div className={["navIcon", node.iconClass].join(' ')}></div>
                             <p>{node.name}</p>

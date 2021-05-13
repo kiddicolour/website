@@ -49,33 +49,6 @@ export const ParentMenuIcon = styled.div`
     margin: none;
 `;
 
-export const SubItemsWrapper = styled.div`
-    position: absolute;
-    top: none;
-    bottom: 48px;
-    left: 0;
-    width: 100%;
-`;
-
-export const MenuSubItemsWrapper = styled.div`
-    background-color: ${secondary};
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    min-height: 48px;
-
-    p {
-        font-family: 'KiddiRegular';
-    }
-`;
-
 export const OddWrapper = styled.div`
     width: 100%;
-`;
-
-export const MenuSubItemWrapper = styled.a`
-    width: 33%;
-    display: flex;
-    align-items: center;
-    color: ${textPrimary};
 `;

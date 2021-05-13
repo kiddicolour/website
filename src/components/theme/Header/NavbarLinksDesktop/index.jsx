@@ -1,12 +1,10 @@
-import { graphql, useStaticQuery } from 'gatsby';
-import React from 'react';
-import { NavbarContainer } from 'components/common';
-import { Wrapper, MenuItemWrapper, MenuIconWrapper, MenuIcon, SubItemsWrapper, MenuSubItemsWrapper , MenuSubItemWrapper } from './styles';
-import '../NavbarLinks/styles.css';
+import React from 'react'
+import { Wrapper, MenuItemWrapper, MenuIconWrapper, MenuIcon } from './styles'
+import '../NavbarLinks/styles.css'
 import AudibleLink from '../NavbarLinks/AudibleLink'
 import SubItems from '../Navbar/SubItems'
 
-const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem, handleAudio, menu }) => {
+const NavbarLinksDesktop = ({ device, currentNavItem, setCurrentNavItem, handleAudio, menu }) => {
 
     const { ages, themes, types } = menu
 
@@ -41,11 +39,11 @@ const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem, handleAudio, me
                 <MenuIconWrapper>
                     <MenuIcon className="navIcon age" />
                 </MenuIconWrapper>
-                <p>age</p>
+                <p>leeftijd</p>
                 <MenuIconWrapper>
                     <MenuIcon className={`${currentNavItem === 'age' ? "dropdownIcon arrow_icon_down_black" : "dropdownIcon arrow_icon_down_white"}`} />
                 </MenuIconWrapper>
-                {currentNavItem === 'age' && <SubItems items={ages} urlPrefix="/age" handleAudio={handleAudio} />}
+                {currentNavItem === 'age' && <SubItems device={device} items={ages} urlPrefix="/leeftijd" handleAudio={handleAudio} />}
             </MenuItemWrapper>
             <MenuItemWrapper
                 onMouseEnter={handleMouseEnter('type')}
@@ -61,7 +59,7 @@ const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem, handleAudio, me
                 <MenuIconWrapper>
                     <MenuIcon className={`${currentNavItem === 'type' ? "dropdownIcon arrow_icon_down_black" : "dropdownIcon arrow_icon_down_white"}`} />
                 </MenuIconWrapper>
-                {currentNavItem === 'type' && <SubItems items={types} urlPrefix="/type" handleAudio={handleAudio} />}
+                {currentNavItem === 'type' && <SubItems device={device} items={types} urlPrefix="/type" handleAudio={handleAudio} />}
             </MenuItemWrapper>
             <MenuItemWrapper
                 onMouseEnter={handleMouseEnter('theme')}
@@ -73,11 +71,11 @@ const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem, handleAudio, me
                 <MenuIconWrapper>
                     <MenuIcon className="navIcon theme" />
                 </MenuIconWrapper>
-                <p>theme</p>
+                <p>thema</p>
                 <MenuIconWrapper>
                     <MenuIcon className={`${currentNavItem === 'theme' ? "dropdownIcon arrow_icon_down_black" : "dropdownIcon arrow_icon_down_white"}`} />
                 </MenuIconWrapper>
-                {currentNavItem === 'theme' && <SubItems items={themes} urlPrefix="/theme" handleAudio={handleAudio} />}
+                {currentNavItem === 'theme' && <SubItems device={device} items={themes} urlPrefix="/thema" handleAudio={handleAudio} />}
             </MenuItemWrapper>
             <MenuItemWrapper
                 as={AudibleLink}
@@ -88,18 +86,18 @@ const NavbarLinksDesktop = ({ currentNavItem, setCurrentNavItem, handleAudio, me
                 <MenuIconWrapper>
                     <MenuIcon className="navIcon downloads" />
                 </MenuIconWrapper>
-                <p>downloads</p>
+                <p>download</p>
             </MenuItemWrapper>
             <MenuItemWrapper
                 as={AudibleLink}
                 audio="whistle1"
                 handleAudio={handleAudio}
-                to="/type/emma-and-thomas"
+                to="/type/emma-en-lowie"
             >
                 <MenuIconWrapper>
                     <MenuIcon className="navIcon type_emma_and_thomas" />
                 </MenuIconWrapper>
-                <p>Emma and Thomas</p>
+                <p>Emma en Lowie</p>
             </MenuItemWrapper>
         </Wrapper>
     );

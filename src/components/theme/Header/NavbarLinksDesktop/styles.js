@@ -46,34 +46,3 @@ export const MenuIcon = styled.div`
 export const DropdownIcon = styled.div`
     margin: auto;
 `;
-
-export const SubItemsWrapper = styled.div`
-    position: absolute;
-    top: 48px;
-    bottom: none;
-    left: 0;
-    width: 100%;
-`;
-
-export const MenuSubItemsWrapper = styled.div`
-    background-color: ${secondary};
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    min-height: 48px;
-`;
-
-export const MenuSubItemWrapper = styled.a`
-    width: 25%;
-    display: flex;
-    align-items: center;
-    color: ${textPrimary};
-
-    p {
-        font-family: 'KiddiRegular';
-    }
-
-    :hover {
-        color: ${primary};
-    }
-`;

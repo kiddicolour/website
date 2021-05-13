@@ -1,14 +1,13 @@
-import { graphql, useStaticQuery } from 'gatsby';
-import React, { useEffect } from 'react';
-import { Link } from 'gatsby'
-import { NavbarContainer } from 'components/common';
-import { Wrapper, MenuItemWrapper, MenuIconWrapper, MenuIcon , SubItemsWrapper, MenuSubItemsWrapper, OddWrapper , MenuSubItemWrapper } from './styles';
-import '../NavbarLinks/styles.css';
+import { graphql, useStaticQuery } from 'gatsby'
+import React, { useEffect } from 'react'
+import { NavbarContainer } from 'components/common'
+import { Wrapper, MenuItemWrapper, MenuIconWrapper, MenuIcon , SubItemsWrapper, MenuSubItemsWrapper, OddWrapper , MenuSubItemWrapper } from './styles'
+import '../NavbarLinks/styles.css'
 import AudibleLink from '../NavbarLinks/AudibleLink'
 import SubItems from '../Navbar/SubItems'
 
 
-const NavbarLinksMobile = ({ currentNavItem, setCurrentNavItem, handleAudio, menu }) => {
+const NavbarLinksMobile = ({ device, currentNavItem, setCurrentNavItem, handleAudio, menu }) => {
 
     const { ages, themes, types } = menu
 
@@ -41,7 +40,7 @@ const NavbarLinksMobile = ({ currentNavItem, setCurrentNavItem, handleAudio, men
                 <MenuIconWrapper className={`${currentNavItem === 'age' ? "active" : ""}`}>
                     <MenuIcon className="navIcon mobile age" />
                 </MenuIconWrapper>
-                {currentNavItem === 'age' && <SubItems items={ages} urlPrefix="/age" handleAudio={handleAudio} />}
+                {currentNavItem === 'age' && <SubItems device={device} items={ages} urlPrefix="/leeftijd" handleAudio={handleAudio} />}
             </MenuItemWrapper>
             <MenuItemWrapper
                 as={AudibleLink}
@@ -52,7 +51,7 @@ const NavbarLinksMobile = ({ currentNavItem, setCurrentNavItem, handleAudio, men
                 <MenuIconWrapper className={`${currentNavItem === 'type' ? "active" : ""}`}>
                     <MenuIcon className="navIcon mobile type" />
                 </MenuIconWrapper>
-                {currentNavItem === 'type' && <SubItems items={types} urlPrefix="/type" handleAudio={handleAudio} />}
+                {currentNavItem === 'type' && <SubItems device={device} items={types} urlPrefix="/type" handleAudio={handleAudio} />}
             </MenuItemWrapper>
             <MenuItemWrapper
                 as={AudibleLink}
@@ -63,7 +62,7 @@ const NavbarLinksMobile = ({ currentNavItem, setCurrentNavItem, handleAudio, men
                 <MenuIconWrapper className={`${currentNavItem === 'theme' ? "active" : ""}`}>
                     <MenuIcon className="navIcon mobile theme" />
                 </MenuIconWrapper>
-                {currentNavItem === 'theme' && <SubItems items={themes} urlPrefix="/theme" handleAudio={handleAudio} />}
+                {currentNavItem === 'theme' && <SubItems device={device} items={themes} urlPrefix="/thema" handleAudio={handleAudio} />}
             </MenuItemWrapper>
             <MenuItemWrapper
                 as={AudibleLink}
@@ -79,7 +78,7 @@ const NavbarLinksMobile = ({ currentNavItem, setCurrentNavItem, handleAudio, men
                 as={AudibleLink}
                 audio="whistle1"
                 handleAudio={handleAudio}
-                to="/type/emma-and-thomas"
+                to="/type/emma-en-lowie"
             >
                 <MenuIconWrapper>
                     <MenuIcon className="navIcon mobile type_emma_and_thomas" />
@@ -89,7 +88,7 @@ const NavbarLinksMobile = ({ currentNavItem, setCurrentNavItem, handleAudio, men
                 as={AudibleLink}
                 audio="tom1"
                 handleAudio={handleAudio}
-                to="/downloads"            
+                onMouseDown={handlePress('filter')}
             >
                 <MenuIconWrapper className={`${currentNavItem === 'filter' ? "active" : ""}`}>
                     <MenuIcon className="navIcon mobile filter_icon" />
@@ -99,11 +98,12 @@ const NavbarLinksMobile = ({ currentNavItem, setCurrentNavItem, handleAudio, men
                 as={AudibleLink}
                 audio="bell3"
                 handleAudio={handleAudio}
+                onMouseDown={handlePress('search')}
             >
                 <MenuIconWrapper className={`${currentNavItem === 'search' ? "active" : ""}`}>
                     <MenuIcon className="navIcon mobile search_icon" />
                 </MenuIconWrapper>
-                {SearchBar(currentNavItem)}
+                {/* {SearchBar(currentNavItem)} */}
             </MenuItemWrapper>
         </Wrapper>
     );
