@@ -5,51 +5,49 @@ import { OddWrapper, SubItemsWrapper, MenuSubItemsWrapper , MenuSubItemWrapper }
 import AudibleLink from '../NavbarLinks/AudibleLink'
 /* import { SubItemsWrapper, MenuSubItemsWrapper , MenuSubItemWrapper } from '../NavbarLinksDesktop/styles' */
 
-const SubItems = ({ device, items, urlPrefix, handleAudio }) => {
-    
+const SubItems = ({ device, items, handleAudio }) => {
+
     let odd = false;
     if (device === 'tablet') {
-        odd = (items.edges.length % 3 === 0) ? false : true;
+        odd = !(items.length % 3 === 0)
     } else if (device === 'mobile') {
-        odd = (items.edges.length % 2 === 0) ? false : true;
+        odd = !(items.length % 2 === 0)
     }
 
     return (
         <SubItemsWrapper device={device} onClick={(e) => e.stopPropagation()}>
             <MenuSubItemsWrapper as={NavbarContainer}>
-                {items.edges.map((item, index) => {
-                    const { node } = item
-
+                {items.map((item, index) => {
                     if (index === 0 && odd) {
                         return (
-                            <OddWrapper key={index} >
+                          <OddWrapper key={`nav_sub_${item.url}`} >
                             <MenuSubItemWrapper
-                                as={node.menuAudio ? AudibleLink : Link}
-                                to={`${urlPrefix}/${node.slug}`}
-                                audio={node.menuAudio}
+                                as={item.audio ? AudibleLink : Link}
+                                to={item.url}
+                                audio={item.audio}
                                 handleAudio={handleAudio}
                                 key={index}
                                 onMouseDown={(e) => e.stopPropagation()}
                             >
-                                <div className={["navIcon", node.iconClass].join(' ')}></div>
-                                <p>{node.name}</p>
+                                <div className={["navIcon", item.icon].join(' ')}></div>
+                                <p>{item.label}</p>
                             </MenuSubItemWrapper>
-                            </OddWrapper>
+                          </OddWrapper>
                         )
                     }
 
                     return (
                         <MenuSubItemWrapper
                             device={device}
-                            as={node.menuAudio ? AudibleLink : Link}
-                            to={`${urlPrefix}/${node.slug}`}
-                            audio={node.menuAudio}
+                            as={item.audio ? AudibleLink : Link}
+                            to={item.url}
+                            audio={item.audio}
                             handleAudio={handleAudio}
-                            key={index}
+                            key={`nav_sub_${item.url}`}
                             onMouseDown={(e) => e.stopPropagation()}
                         >
-                            <div className={["navIcon", node.iconClass].join(' ')}></div>
-                            <p>{node.name}</p>
+                            <div className={["navIcon", item.icon].join(' ')}></div>
+                            <p>{item.label}</p>
                         </MenuSubItemWrapper>
                     )
 

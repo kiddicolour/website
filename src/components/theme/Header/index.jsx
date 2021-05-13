@@ -83,6 +83,7 @@ const query = graphql`
           label
           url
           order
+          audio
           strapiParent {
             order
           }

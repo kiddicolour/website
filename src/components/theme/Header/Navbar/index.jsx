@@ -5,54 +5,62 @@ import NavbarLinks from '../NavbarLinks'
 import './styles.css'
 import audioElements from './audio'
 
+import { enhanceMenu, groupMenu, sortMenu } from './utils'
 
 const Navbar = ({ device, menu }) => {
 
-    // store the current playing audio file, passed on from component
-    const [ audio, setAudio ] = useState(false)
-    const [ isPlaying, setIsPlaying ] = useState(false)
+  if (! menu?.edges) return null
 
-    useEffect(() => {
-        const audioElement = audioElements.reduce((res, elem) => {
-            return res ? res : (elem[0] === audio ? elem[1] : false)
-        }, false)
+  // store the current playing audio file, passed on from component
+  const [ audio, setAudio ] = useState(false)
+  const [ isPlaying, setIsPlaying ] = useState(false)
 
-        // store timeout in state so it can be cleared / reused
-        setIsPlaying(window.setTimeout(() => {
-            if (audioElement) {
-                audioElement.currentTime = 0
-                audioElement.play()
-            }
-        }, 100))
-        return (() => {
-            window.clearTimeout(isPlaying)
-        })
-    }, [audio])
+  console.log('menu', menu.edges)
+  console.log('enhanced', enhanceMenu(menu.edges))
+  console.log('sorted', sortMenu(enhanceMenu(menu.edges)))
+  console.log('grouped', groupMenu(sortMenu(enhanceMenu(menu.edges))))
 
-    const handleAudio = (audioFile) => {
-        setAudio(audioFile)
-    }
+  useEffect(() => {
+    const audioElement = audioElements.reduce((res, elem) => {
+      return res ? res : (elem[0] === audio ? elem[1] : false)
+    }, false)
 
-    const OnSearch = () => {
+    // store timeout in state so it can be cleared / reused
+    setIsPlaying(window.setTimeout(() => {
+      if (audioElement) {
+          audioElement.currentTime = 0
+          audioElement.play()
+      }
+    }, 100))
+    return (() => {
+      window.clearTimeout(isPlaying)
+    })
+  }, [audio])
 
-    }
+  const handleAudio = (audioFile) => {
+    setAudio(audioFile)
+  }
 
-    const OnTextChange = () => {
+  const OnSearch = () => {
 
-    }
+  }
 
-    return (
-        <Wrapper>
-            <WrapperLinks as={NavbarContainer}>
-                <NavbarLinks device={device} handleAudio={handleAudio} menu={menu} />
-                <SearchBar device={device}>
-                    <form className="searchBarDesktop">
-                        <input className="searchInputDesktop" type="text" placeholder="Search..." onChange={OnTextChange}/>
-                    </form>
-                </SearchBar>
-            </WrapperLinks>
-        </Wrapper>
-    );
+  const OnTextChange = () => {
+
+  }
+
+  return (
+    <Wrapper>
+      <WrapperLinks as={NavbarContainer}>
+        <NavbarLinks device={device} handleAudio={handleAudio} menu={groupMenu(sortMenu(enhanceMenu(menu.edges)))} />
+        <SearchBar device={device}>
+          <form className="searchBarDesktop">
+            <input className="searchInputDesktop" type="text" placeholder="Search..." onChange={OnTextChange}/>
+          </form>
+        </SearchBar>
+      </WrapperLinks>
+    </Wrapper>
+  );
 }
 
 export default Navbar

@@ -6,15 +6,41 @@ import SubItems from '../Navbar/SubItems'
 
 const NavbarLinksDesktop = ({ device, currentNavItem, setCurrentNavItem, handleAudio, menu }) => {
 
-    const { ages, themes, types } = menu
+    //const { ages, themes, types } = menu
 
-    const handleMouseEnter = (kind) => () => {
-        setCurrentNavItem(kind)
+    const handleMouseEnter = (url) => () => {
+        setCurrentNavItem(url)
     }
 
     const handleMouseLeave = () => {
         setCurrentNavItem('')
     }
+
+    console.log('menu in Desktop', menu)
+
+    return (
+      <Wrapper>
+        {menu.map((group, index) => (
+          <MenuItemWrapper
+            key={`nav_${index}`}
+            onMouseEnter={handleMouseEnter(group.url)}
+            onMouseLeave={handleMouseLeave}
+            as={AudibleLink}
+            audio={group.audio}
+            handleAudio={handleAudio}
+            to={group.url}
+          >
+            <MenuIconWrapper>
+              <MenuIcon className="navIcon home" />
+            </MenuIconWrapper>
+            <p>{group.label}</p>
+            { currentNavItem === group.url && group.children.length && (
+              <SubItems device={device} items={group.children} handleAudio={handleAudio} />
+            ) || null}
+          </MenuItemWrapper>
+        ))}
+      </Wrapper>
+    )
 
     return (
         <Wrapper>
