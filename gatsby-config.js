@@ -1,64 +1,63 @@
-const config = require("platformsh-config").config();
+const config = require('platformsh-config').config()
 
-var backend_route = "";
+var backend_route = ''
 if (config.isValidPlatform()) {
-  require("dotenv").config({
+  require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
   })
-  backend_route = `http://${config.credentials("strapi")["host"]}`
+  backend_route = `http://${config.credentials('strapi')['host']}`
 } else {
-  require("dotenv").config()
-  backend_route = process.env.API_URL;
+  require('dotenv').config()
+  backend_route = process.env.API_URL
 }
-
 
 module.exports = {
   siteMetadata: {
-    title: "kiddicolour",
-    description: "thoughtfully designed colouring pages",
-    author: "kiddicolour",
+    title: 'kiddicolour',
+    description: 'thoughtfully designed colouring pages',
+    author: 'kiddicolour',
   },
   plugins: [
-    "gatsby-plugin-react-helmet",
+    'gatsby-plugin-react-helmet',
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: "images",
+        name: 'images',
         path: `${__dirname}/src/images`,
       },
     },
     {
-      resolve: "gatsby-source-strapi",
+      resolve: 'gatsby-source-strapi',
       options: {
         apiURL: backend_route,
-        contentTypes: [
+        collectionTypes: [
           // List of the Content Types you want to be able to request from Gatsby.
-          "age",
-          "tag",
-          "theme",
-          "type",
-          "drawing",
-          "download",
-          "featured",
-          "menu"
+          'age',
+          'tag',
+          'theme',
+          'type',
+          'drawing',
+          'download',
+          'featured',
+          'menu',
         ],
-        singleTypes: ["global"],
+        singleTypes: ['global'],
         queryLimit: 1000,
       },
     },
-    "gatsby-transformer-sharp",
-    "gatsby-plugin-sharp",
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
     {
-      resolve: "gatsby-plugin-manifest",
+      resolve: 'gatsby-plugin-manifest',
       options: {
-        name: "gatsby-starter-default",
-        short_name: "starter",
-        start_url: "/",
-        background_color: "#663399",
-        theme_color: "#663399",
-        display: "minimal-ui",
+        name: 'gatsby-starter-default',
+        short_name: 'starter',
+        start_url: '/',
+        background_color: '#663399',
+        theme_color: '#663399',
+        display: 'minimal-ui',
       },
     },
-    "gatsby-plugin-offline",
+    'gatsby-plugin-offline',
   ],
 }

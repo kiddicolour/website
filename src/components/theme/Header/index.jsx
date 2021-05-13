@@ -36,48 +36,6 @@ export const Header = () => {
 }
 
 const query = graphql`
-<<<<<<< HEAD
-    query {
-        ages: allStrapiAge(sort: {fields: menuOrder, order: ASC}) {
-            edges {
-                node {
-                    name
-                    slug
-                    iconClass
-                    menuAudio
-                }
-            }
-        }
-        types: allStrapiType(filter: {strapiParent: {name: {eq: "types"}}}, sort: {fields: menuOrder, order: ASC}) {
-            edges {
-                node {
-                    name
-                    iconClass
-                    slug
-                    menuAudio
-                    strapiChildren {
-                        name
-                        slug
-                        iconClass
-                    }
-                }
-            }
-        }
-        themes: allStrapiTheme(filter: {strapiParent: {name: {eq: "themes"}}}, sort: {fields: menuOrder, order: ASC}) {
-            edges {
-                node {
-                    name
-                    iconClass
-                    menuAudio
-                    slug
-                    strapiChildren {
-                        name
-                        slug
-                        iconClass
-                    }
-                }
-            }
-=======
   query {
     ages: allStrapiAge(sort: { fields: id }) {
       edges {
@@ -128,7 +86,6 @@ const query = graphql`
           strapiParent {
             order
           }
->>>>>>> ea7a94fa742b0a82a0ba3b146d1282d294178ce7
         }
       }
     }

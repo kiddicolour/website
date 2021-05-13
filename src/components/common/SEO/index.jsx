@@ -119,14 +119,11 @@ export const querySEO = graphql`
             name
           }
         }
-<<<<<<< HEAD
-=======
         shareImage {
           image {
             url
           }
         }
->>>>>>> ea7a94fa742b0a82a0ba3b146d1282d294178ce7
       }
     }
   }
