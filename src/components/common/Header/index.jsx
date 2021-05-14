@@ -3,25 +3,25 @@ import { graphql, useStaticQuery } from 'gatsby'
 import Navbar from './Navbar'
 import { ThemeContext } from 'providers/ThemeProvider';
 import { LanguageContext } from 'providers/LanguageProvider';
-import { Container, LanguageSelect } from 'components/common';
+import { Container, LanguageSelect } from '../';
 import { Wrapper, IntroWrapper, Details, Thumbnail } from './styles';
-import { composeSEO, querySEO } from 'components/common/SEO'
-import useLanguage from '../../../hooks/useLanguage';
+import { composeSEO, querySEO } from '../'
+import useLanguage from 'hooks/useLanguage';
 
 
-export const Header = ({ lang = 'nl' }) => {
+export const Header = ({ lang = 'nl', global = {} }) => {
 
   const { theme } = useContext(ThemeContext)
   const { language, setLanguage } = useContext(LanguageContext)
 
   console.log('language', language)
 
-  const { strapiGlobal } = useStaticQuery(querySEO)
-  const { title, introduction } = strapiGlobal
-  const defaultSeo = strapiGlobal.seo
+  const { title, introduction } = global
+  const defaultSeo = global.seo
   const seo = composeSEO(defaultSeo, { title })
 
   const getWindowDimensions = () => {
+    if (typeof window === 'undefined') return 'desktop'
     if (window.innerWidth < 768) {
       return 'mobile'
     } else if (window.innerWidth >= 992) {
@@ -34,21 +34,15 @@ export const Header = ({ lang = 'nl' }) => {
   const { menu } = useStaticQuery(query)
 
   const handleResize = () => {
-    if (window.innerWidth < 768) {
-      setDevice('mobile')
-    } else if (window.innerWidth >= 992) {
-      setDevice('desktop')
-    } else if (window.innerWidth >= 768) {
-      setDevice('tablet')
-    }
+    setDevice(getWindowDimensions())
   }
 
-  window.addEventListener('resize', handleResize)
+  typeof window !== 'undefined' && window.addEventListener('resize', handleResize)
 
   return (
     <>
       <IntroWrapper as={Container}>
-        <LanguageSelect lang={language} onChange={setLanguage}/>
+        <LanguageSelect lang={language} onChange={setLanguage} />
         <Details theme={theme}>
           <h1>{seo.title}</h1>
           <h4>{introduction}</h4>
@@ -110,6 +104,15 @@ const query = graphql`
           url
           order
           audio
+          age {
+            slug
+          }
+          type {
+            slug
+          }
+          theme {
+            slug
+          }
           strapiParent {
             order
           }

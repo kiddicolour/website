@@ -30,7 +30,7 @@ module.exports = {
       resolve: 'gatsby-source-strapi',
       options: {
         apiURL: backend_route,
-        collectionTypes: [
+        contentTypes: [
           // List of the Content Types you want to be able to request from Gatsby.
           'age',
           'tag',

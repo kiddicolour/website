@@ -14,7 +14,7 @@ export const query = graphql`
       title
       description
       image {
-        url
+        publicURL
       }
     }
   }

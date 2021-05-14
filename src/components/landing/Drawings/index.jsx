@@ -21,7 +21,7 @@ export const Drawings = () => {
               slug
               description
               image {
-                url
+                publicURL
               }
               themes {
                 name

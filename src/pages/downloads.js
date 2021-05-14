@@ -39,10 +39,10 @@ export const query = graphql`
           id
           title
           file {
-            url
+            publicURL
           }
           preview {
-            url
+            publicURL
           }
         }
       }

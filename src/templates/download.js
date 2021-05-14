@@ -13,10 +13,10 @@ export const query = graphql`
       strapiId
       title
       preview {
-        url
+        publicURL
       }
       file {
-        url
+        publicURL
       }
     }
   }

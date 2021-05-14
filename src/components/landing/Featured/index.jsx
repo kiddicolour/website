@@ -23,7 +23,7 @@ export const Featured = () => {
                 title
                 description
                 image {
-                  url
+                  publicURL
                 }
               }
               theme {

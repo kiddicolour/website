@@ -9,11 +9,11 @@ import { enhanceMenu, groupMenu, sortMenu } from './utils'
 
 const Navbar = ({ device, menu }) => {
 
-  if (! menu?.edges) return null
+  if (!menu?.edges) return null
 
   // store the current playing audio file, passed on from component
-  const [ audio, setAudio ] = useState(false)
-  const [ isPlaying, setIsPlaying ] = useState(false)
+  const [audio, setAudio] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   console.log('menu', menu.edges)
   console.log('enhanced', enhanceMenu(menu.edges))
@@ -28,8 +28,8 @@ const Navbar = ({ device, menu }) => {
     // store timeout in state so it can be cleared / reused
     setIsPlaying(window.setTimeout(() => {
       if (audioElement) {
-          audioElement.currentTime = 0
-          audioElement.play()
+        audioElement.currentTime = 0
+        audioElement.play()
       }
     }, 100))
     return (() => {
@@ -55,7 +55,7 @@ const Navbar = ({ device, menu }) => {
         <NavbarLinks device={device} handleAudio={handleAudio} menu={groupMenu(sortMenu(enhanceMenu(menu.edges)))} />
         <SearchBar device={device}>
           <form className="searchBarDesktop">
-            <input className="searchInputDesktop" type="text" placeholder="Search..." onChange={OnTextChange}/>
+            <input className="searchInputDesktop" type="text" placeholder="Search..." onChange={OnTextChange} />
           </form>
         </SearchBar>
       </WrapperLinks>

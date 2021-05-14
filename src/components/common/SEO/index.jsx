@@ -121,7 +121,7 @@ export const querySEO = graphql`
         }
         shareImage {
           image {
-            url
+            publicURL
           }
         }
       }

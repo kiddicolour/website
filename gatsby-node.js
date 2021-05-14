@@ -1,4 +1,21 @@
 const path = require('path');
+const { get } = require('request')
+const { promisify } = require("util")
+const getAsync = promisify(get)
+
+const config = require('platformsh-config').config()
+
+let backend_route = ''
+if (config.isValidPlatform()) {
+  require('dotenv').config({
+    path: `.env.${process.env.NODE_ENV}`,
+  })
+  backend_route = `http://${config.credentials('strapi')['host']}`
+} else {
+  require('dotenv').config()
+  backend_route = process.env.API_URL
+}
+
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
@@ -22,10 +39,42 @@ exports.onCreateWebpackConfig = ({ actions }) => {
 } */
 
 exports.createPages = async ({ graphql, actions }) => {
+
   const { createPage } = actions
+
+  // fetch available languages from Strapi
+  // requires the i18n/locales endpoint to be publicly accessible
+
+  let languages
+
+  const { statusCode, body } = await getAsync(`${backend_route}/i18n/locales`)
+
+  if (statusCode !== 200) {
+    langauages = ['nl']
+  }
+  languages = JSON.parse(body).map(lang => ({ label: lang.name, value: lang.code, default: lang.isDefault }))
+
   const result = await graphql(
     `
       {
+        global: strapiGlobal {
+          title
+          description
+          seo {
+            meta {
+              title
+              description
+              keywords {
+                name
+              }
+            }
+            shareImage {
+              image {
+                publicURL
+              }
+            }
+          }
+        }
         drawings: allStrapiDrawing {
           edges {
             node {
@@ -97,81 +146,83 @@ exports.createPages = async ({ graphql, actions }) => {
     throw result.errors
   }
 
-  // Create drawing pages.
-  const drawings = result.data.drawings.edges
-  drawings.forEach((drawing, index) => {
-    createPage({
-      path: `/coloring-page/${drawing.node.strapiId}`,
-      component: require.resolve("./src/templates/drawing.js"),
-      context: {
-        id: drawing.node.strapiId,
-      },
-    })
-  })
+  try {
 
-  // Create age pages.
-  const ages = result.data.ages.edges
-  ages.forEach((age, index) => {
-    createPage({
-      path: `/leeftijd/${age.node.name.replace(/ /g, "-").toLowerCase()}`,
-      component: require.resolve("./src/templates/age.js"),
-      context: {
-        id: age.node.strapiId,
-      },
-    })
-  })
+    const { global, drawings, ages, themes, types, downloads } = result.data
 
-  // Create theme pages.
-  const themes = result.data.themes.edges
-  themes.forEach((theme, index) => {
-    createPage({
-      path: `/thema/${theme.node.name.replace(/ /g, "-").toLowerCase()}`,
-      component: require.resolve("./src/templates/theme.js"),
-      context: {
-        id: theme.node.strapiId,
-      },
-    })
-    theme.node.strapiChildren.forEach((subtheme, index) => {
+    // Create drawing pages.
+    drawings.edges.forEach((drawing, index) => {
       createPage({
-        path: `/thema/${theme.node.name.replace(/ /g, "-").toLowerCase()}/${subtheme.name.replace(/ /g, "-").toLowerCase()}`,
-        component: require.resolve("./src/templates/theme.js"),
+        path: `/coloring-page/${drawing.node.strapiId}`,
+        component: require.resolve("./src/templates/drawing.js"),
         context: {
-          id: subtheme.id,
+          id: drawing.node.strapiId,
         },
       })
     })
-  })
 
-  // Create type pages.
-  const types = result.data.types.edges
-  types.forEach((type, index) => {
-    createPage({
-      path: `/type/${type.node.name.replace(/ /g, "-").toLowerCase()}`,
-      component: require.resolve("./src/templates/type.js"),
-      context: {
-        id: type.node.strapiId,
-      },
-    })
-    type.node.strapiChildren.forEach((subtype, index) => {
+    // Create age pages.
+    ages.edges.forEach((age, index) => {
       createPage({
-        path: `/type/${type.node.name.replace(/ /g, "-").toLowerCase()}/${subtype.name.replace(/ /g, "-").toLowerCase()}`,
-        component: require.resolve("./src/templates/type.js"),
+        path: `/leeftijd/${age.node.name.replace(/ /g, "-").toLowerCase()}`,
+        component: require.resolve("./src/templates/age.js"),
         context: {
-          id: subtype.id,
-        }
+          id: age.node.strapiId,
+        },
       })
     })
-  })
 
-  // Create download pages.
-  const downloads = result.data.downloads.edges
-  downloads.forEach((download, index) => {
-    createPage({
-      path: `/download/${download.node.strapiId}`,
-      component: require.resolve("./src/templates/download.js"),
-      context: {
-        id: download.node.strapiId,
-      },
+    // Create theme pages.
+    themes.edges.forEach((theme, index) => {
+      createPage({
+        path: `/thema/${theme.node.name.replace(/ /g, "-").toLowerCase()}`,
+        component: require.resolve("./src/templates/theme.js"),
+        context: {
+          id: theme.node.strapiId,
+        },
+      })
+      // theme.node.strapiChildren.forEach((subtheme, index) => {
+      //   createPage({
+      //     path: `/thema/${theme.node.name.replace(/ /g, "-").toLowerCase()}/${subtheme.name.replace(/ /g, "-").toLowerCase()}`,
+      //     component: require.resolve("./src/templates/theme.js"),
+      //     context: {
+      //       id: subtheme.id,
+      //     },
+      //   })
+      // })
     })
-  })
+
+    // Create type pages.
+    types.edges.forEach((type, index) => {
+      createPage({
+        path: `/type/${type.node.name.replace(/ /g, "-").toLowerCase()}`,
+        component: require.resolve("./src/templates/type.js"),
+        context: {
+          id: type.node.strapiId,
+        },
+      })
+      // type.node.strapiChildren.forEach((subtype, index) => {
+      //   createPage({
+      //     path: `/type/${type.node.name.replace(/ /g, "-").toLowerCase()}/${subtype.name.replace(/ /g, "-").toLowerCase()}`,
+      //     component: require.resolve("./src/templates/type.js"),
+      //     context: {
+      //       id: subtype.id,
+      //     }
+      //   })
+      // })
+    })
+
+    // Create download pages.
+    downloads.edges.forEach((download, index) => {
+      createPage({
+        path: `/download/${download.node.strapiId}`,
+        component: require.resolve("./src/templates/download.js"),
+        context: {
+          id: download.node.strapiId,
+        },
+      })
+    })
+  } catch (e) {
+    console.error(`Gatsby SSR error: ${e}`)
+  }
 }

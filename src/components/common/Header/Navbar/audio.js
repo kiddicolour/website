@@ -1,3 +1,3 @@
 import files from '../../../../assets/sounds'
 
-export default Object.keys(files).map(name => [name, new Audio(files[name])])
+export default Object.keys(files).map(name => [name, typeof window !== 'undefined' ? new Audio(files[name]) : false])
