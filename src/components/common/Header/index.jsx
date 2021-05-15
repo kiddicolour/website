@@ -6,15 +6,15 @@ import { LanguageContext } from 'providers/LanguageProvider';
 import { Container, LanguageSelect } from '../';
 import { Wrapper, IntroWrapper, Details, Thumbnail } from './styles';
 import { composeSEO, querySEO } from '../'
-import useLanguage from 'hooks/useLanguage';
+// import useLanguage from 'hooks/useLanguage';
 
 
 export const Header = ({ lang = 'nl', global = {} }) => {
 
   const { theme } = useContext(ThemeContext)
-  const { language, setLanguage } = useContext(LanguageContext)
+  const { language, setLanguage, languages } = useContext(LanguageContext)
 
-  console.log('language', language)
+  console.log('Header language', language, languages)
 
   const { title, introduction } = global
   const defaultSeo = global.seo

@@ -15,10 +15,10 @@ const Navbar = ({ device, menu }) => {
   const [audio, setAudio] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
 
-  console.log('menu', menu.edges)
-  console.log('enhanced', enhanceMenu(menu.edges))
-  console.log('sorted', sortMenu(enhanceMenu(menu.edges)))
-  console.log('grouped', groupMenu(sortMenu(enhanceMenu(menu.edges))))
+  // console.log('menu', menu.edges)
+  // console.log('enhanced', enhanceMenu(menu.edges))
+  // console.log('sorted', sortMenu(enhanceMenu(menu.edges)))
+  // console.log('grouped', groupMenu(sortMenu(enhanceMenu(menu.edges))))
 
   useEffect(() => {
     const audioElement = audioElements.reduce((res, elem) => {

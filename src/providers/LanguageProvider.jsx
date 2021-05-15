@@ -1,17 +1,17 @@
 import React, { createContext } from 'react';
-import useDarkMode from 'hooks/useDarkMode';
 import useLanguage from 'hooks/useLanguage';
 
-export const LanguageContext = createContext('light');
+export const LanguageContext = createContext('nl');
 
 export default ({ children }) => {
-  const [language, toggleLanguage] = useDarkMode();
+  const [language, toggleLanguage, languages] = useLanguage('nl');
 
   return (
     <LanguageContext.Provider
       value={{
         language,
         toggleLanguage,
+        languages
       }}
     >
       {children}
