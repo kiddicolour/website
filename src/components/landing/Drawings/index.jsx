@@ -46,8 +46,7 @@ export const Drawings = () => {
           <Item
             key={node.strapiId}
             as="a"
-            href={node.title}
-            target="_blank"
+            href={'/kleurprent-kleurplaat/' + node.slug}
             rel="noopener noreferrer"
             theme={theme}
           >

@@ -19,9 +19,12 @@ module.exports = {
   primary: '#3366cc',
   secondary: '#ffffcf',
   detail: '#ffcc66',
+  detailSecondary: '#ff6666',
   textPrimary: '#000000',
   textSecondary: '#ffffff',
   text: {
+    title: '30px',
+    subtitle: '24px',
     header: '18px',
     nav: '13px',
   },

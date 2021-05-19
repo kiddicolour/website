@@ -79,6 +79,7 @@ exports.createPages = async ({ graphql, actions }) => {
           edges {
             node {
               strapiId
+              slug
             }
           }
         }
@@ -153,8 +154,8 @@ exports.createPages = async ({ graphql, actions }) => {
     // Create drawing pages.
     drawings.edges.forEach((drawing, index) => {
       createPage({
-        path: `/coloring-page/${drawing.node.strapiId}`,
-        component: require.resolve("./src/templates/drawing.js"),
+        path: `/kleurprent-kleurplaat/${drawing.node.slug}`,
+        component: require.resolve("./src/templates/drawing/drawing.jsx"),
         context: {
           id: drawing.node.strapiId,
         },
