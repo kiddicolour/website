@@ -8,7 +8,7 @@ import Moment from 'react-moment'
 import { Container, Layout, SEO } from 'components/common'
 import { Header } from 'components/common'
 
-import { Wrapper, FilterWrapper, Filter, DrawingWrapper, ButtonsWrapper, Button, Title, DesktopTitle, ImageWrapper, Image, CategoriesWrapper, CategoryWrapper, CategoryTitle, Category, CategoryImage, CategoryName } from './styles'
+import { Wrapper, FilterWrapper, Filter, DrawingWrapper, ButtonsWrapper, Button, Title, ImageWrapper, Body, Image, DesktopTitle, Description, CategoriesWrapper, CategoryWrapper, CategoryTitle, Category, CategoryImage, CategoryName } from './styles'
 
 import '../../components/common/Header/NavbarLinks/styles.css'
 
@@ -28,11 +28,13 @@ export const query = graphql`
       }
       types {
         name
+        parent
         slug
         iconClass
       }
       themes {
         name
+        parent
         slug
         iconClass
       }
@@ -58,51 +60,60 @@ const Drawing = ({ data }) => {
           </ButtonsWrapper>
           <Title>{drawing.title}</Title>
           <ImageWrapper>
-            <Image src={drawing.image.publicURL} alt={drawing.title}></Image>
+            <Body>
+              <Image src={drawing.image.publicURL} alt={drawing.title}></Image>
+              <DesktopTitle>{drawing.title}</DesktopTitle>
+              <ReactMarkdown children={drawing.description} />
+            </Body>
             <CategoriesWrapper>
               <CategoryWrapper>
                 <CategoryTitle>leeftijd</CategoryTitle>
-                {drawing.ages.map((age, index) => (
+                {drawing.ages.map(age => (
                   <Category
                     as={Link}
                     to={"/leeftijd/" + age.slug}
                   >
-                    <CategoryImage className={age.iconClass}></CategoryImage>
+                    <CategoryImage className={"navIcon " + age.iconClass}></CategoryImage>
                     <CategoryName>{age.name}</CategoryName>
                   </Category>
                 ))}
               </CategoryWrapper>
               <CategoryWrapper>
                 <CategoryTitle>type</CategoryTitle>
-                {drawing.types.map((type, index) => (
-                  <Category
-                    as={Link}
-                    to={"/type/" + type.slug}
-                  >
-                    <CategoryImage className={type.iconClass}></CategoryImage>
-                    <CategoryName>{type.name}</CategoryName>
-                  </Category>
-                ))}
+                {drawing.types.map(type => {
+                  /* replace hard code */
+                  if(type.parent === 237) {
+                    return <Category
+                      as={Link}
+                      to={"/type/" + type.slug}
+                    >
+                      <CategoryImage className={"navIcon " + type.iconClass}></CategoryImage>
+                      <CategoryName>{type.name}</CategoryName>
+                    </Category>
+                  }
+                })}
               </CategoryWrapper>
               <CategoryWrapper>
                 <CategoryTitle>thema</CategoryTitle>
-                {drawing.themes.map((theme, index) => (
-                  <Category
-                    as={Link}
-                    to={"/thema/" + theme.slug}
-                  >
-                    <CategoryImage className={theme.iconClass}></CategoryImage>
-                    <CategoryName>{theme.name}</CategoryName>
-                  </Category>
-                ))}
+                {drawing.themes.map(theme => {
+                  /* replace hard code */
+                  if(theme.parent === 785) {
+                    return <Category
+                      as={Link}
+                      to={"/theme/" + theme.slug}
+                    >
+                      <CategoryImage className={"navIcon " + theme.iconClass}></CategoryImage>
+                      <CategoryName>{theme.name}</CategoryName>
+                    </Category>
+                  }
+                })}
               </CategoryWrapper>
             </CategoriesWrapper>
           </ImageWrapper>
-          <DesktopTitle>{drawing.title}</DesktopTitle>
         </DrawingWrapper>
       </Wrapper>
 
-      <div>
+      {/* <div>
         <div
           id="banner"
           className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
@@ -121,7 +132,7 @@ const Drawing = ({ data }) => {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
     </Layout>
   )
 }

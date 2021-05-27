@@ -19,7 +19,7 @@ export const FilterWrapper = styled.div`
 
 export const Filter = styled.div`
     background-color: ${detailSecondary};
-    margin: 24px 24px 24px 12px;
+    margin: 24px 24px 24px 0px;
     height: 800px;
 `;
 
@@ -61,15 +61,6 @@ export const Title = styled.h1`
     }
 `;
 
-export const DesktopTitle = styled.h1`
-    display: none;
-    font-size: ${text.subtitle};
-
-    @media (min-width: 992px) {
-        display: block;
-    }
-`;
-
 export const ImageWrapper = styled.div`
     width: 100%;
     display: flex;
@@ -80,21 +71,40 @@ export const ImageWrapper = styled.div`
     }
 `;
 
-export const Image = styled.img`
+export const Body = styled.div`
     width: 100%;
-    height: 100%;
 
     @media (min-width: 992px) {
         width: 83%;
     }
 `;
 
+export const Image = styled.img`
+    
+`;
+
+export const DesktopTitle = styled.h1`
+    display: none;
+    font-size: ${text.subtitle};
+
+    @media (min-width: 992px) {
+        display: block;
+    }
+`;
+
+export const Description = styled.p`
+    
+`;
+
 export const CategoriesWrapper = styled.div`
     width: 100%;
-    margin: 0px 12px 0px 12px;
+    display: flex;
+    flex-direction: row;
+    margin: 0px 0px 0px 24px;
 
     @media (min-width: 992px) {
         width: 17%;
+        flex-direction: column;
     }
 `;
 
@@ -104,21 +114,19 @@ export const CategoryWrapper = styled.div`
 
 export const CategoryTitle = styled.h3`
     font-size: 18px;
+    margin-bottom: 6px;
 `;
 
 export const Category = styled.a`
 
 `;
 
-export const CategoryImage = styled.img`
-    width: 48px;
-    height: 48px;
-    background-size: 70%;
-    background-repeat: no-repeat;
-    background-position-x: center;
-    background-position-y: center;
+export const CategoryImage = styled.div`
+    background-position-x: left;
 `;
 
 export const CategoryName = styled.p`
     font-size: 12px;
+    margin-bottom: 12px;
+    color: ${textPrimary};
 `;
