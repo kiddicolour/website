@@ -61,7 +61,7 @@ const Drawing = ({ data }) => {
           <Title>{drawing.title}</Title>
           <ImageWrapper>
             <Body>
-              <Image src={drawing.image.publicURL} alt={drawing.title}></Image>
+              <Image src={drawing.image != null ? drawing.image.publicURL : "/"}></Image>
               <DesktopTitle>{drawing.title}</DesktopTitle>
               <ReactMarkdown children={drawing.description} />
             </Body>
